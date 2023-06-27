@@ -29,7 +29,6 @@ def process_pcap_file(file_path):
         # ggml-mpt-7b-instruct
         gptj = gpt4all.GPT4All('GPT4All-13B-snoozy.ggmlv3.q4_0.bin')
         gptj.model.set_thread_count(4)
-        gptj.model.
         #gptj = gpt4all.GPT4All(os.environ['GPT_MODEL_NAME'])
 
         packets = rdpcap(file_path)
