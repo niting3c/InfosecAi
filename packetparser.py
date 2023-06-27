@@ -28,7 +28,8 @@ def process_pcap_file(file_path):
         # nous-hermes-13b.ggmlv3.q4_0.bin
         # ggml-mpt-7b-instruct
         gptj = gpt4all.GPT4All('GPT4All-13B-snoozy.ggmlv3.q4_0.bin')
-        gptj.model.set_thread_count(6)
+        gptj.model.set_thread_count(4)
+        gptj.model.
         #gptj = gpt4all.GPT4All(os.environ['GPT_MODEL_NAME'])
 
         packets = rdpcap(file_path)
@@ -38,12 +39,14 @@ def process_pcap_file(file_path):
             os.remove(result_file_path)
         # Iterate over each packet and extract streams
         with open(result_file_path, 'w', encoding="utf-8") as f:
-            print(gptj.generate(generate_first_prompt()), file=f)
+            print(gptj.generate(generate_first_prompt(),streaming=True), file=f)
+            print("-"*40,file=f)
             for packet in packets:
                 # Create packet input dictionary
                 summary = packet.summary()
-                print(f"Sending Prompt: {generate_prompt(summary)}\n\n\n\n", file=f)
-                print(gptj.generate(generate_prompt(summary)), file=f)
+                print(f"Sending Prompt: {generate_prompt(summary)}\n\n", file=f)
+                print(gptj.generate(generate_prompt(summary),streaming=True), file=f)
+                print("-"*40,file=f)
                 f.flush()
             f.close()    
         print(f"Processed: {file_path}")
