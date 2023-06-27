@@ -1,0 +1,1201 @@
+1. Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http S
+    ### Response
+    
+
+
+
+
+ Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 SA / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50580 > 178.62.254.78:http S
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 74.220.215.91:http > 192.168.204.147:50573 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50573 > 74.220.215.91:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 178.62.254.78:http > 192.168.204.147:50580 SA / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50580 > 178.62.254.78:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50580 > 178.62.254.78:http PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 178.62.254.78:http > 192.168.204.147:50580 A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 178.62.254.78:http > 192.168.204.147:50580 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 178.62.254.78:http > 192.168.204.147:50580 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50580 > 178.62.254.78:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http S
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 SA / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 A / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 A / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 A / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 192.168.204.147:50581 > 80.85.85.56:http A / Padding
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious
+Sending Prompt: 
+     ### Instruction: 
+     For a provided TCP Stream summary in the Prompt below, check whether its a malicious request or not.
+     Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
+    ###Prompt
+    Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
+    Classify if this Packet is Malicious ? 
+    packet Summary from rdpcap tool: Ether / IP / TCP 80.85.85.56:http > 192.168.204.147:50581 PA / Raw
+    ### Response
+    
+
+
+
+
+ Not Malicious

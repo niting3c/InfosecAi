@@ -28,6 +28,7 @@ def process_pcap_file(file_path):
         # nous-hermes-13b.ggmlv3.q4_0.bin
         # ggml-mpt-7b-instruct
         gptj = gpt4all.GPT4All('GPT4All-13B-snoozy.ggmlv3.q4_0.bin')
+        gptj.model.set_thread_count(6)
         #gptj = gpt4all.GPT4All(os.environ['GPT_MODEL_NAME'])
 
         packets = rdpcap(file_path)
@@ -75,7 +76,7 @@ def generate_prompt(packet):
      Think step by step and carefully but only answer with either `Malicious` or `Not Malicious`! Do not be verbose .    
     ###Prompt
     Check the TCP Stream payloads if they have a malicious behaviour , like carrying a malware or doing actions that maybe harmfull.
-    Classify if this Packet is Malicious ?
+    Classify if this Packet is Malicious ? 
     packet Summary from rdpcap tool: {}
     ### Response
     """.format(
