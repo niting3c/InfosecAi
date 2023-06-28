@@ -4,7 +4,7 @@ import tempfile
 
 from scapy.all import rdpcap
 
-from gpt4all import AiModel
+import gpt4all
 
 
 def process_pcap_files(directory):
@@ -26,7 +26,7 @@ def process_pcap_file(file_path):
         # available models to use
         # GPT4All-13B-snoozy.ggmlv3.q4_0
         # nous-hermes-13b.ggmlv3.q4_0
-        gptj = AiModel("TheBloke/orca_mini_13B-GPTQ")
+        gptj = gpt4all.GPT4All("nous-hermes-13b.ggmlv3.q4_0")
         gptj.model.set_thread_count(6)
         # gptj = gpt4all.GPT4All(os.environ['GPT_MODEL_NAME'])
 
