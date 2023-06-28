@@ -1,10 +1,10 @@
 import os
 import shutil
 import tempfile
-import json
-import gpt4all
+
 from scapy.all import rdpcap
 
+from gpt4all import AiModel
 
 
 def process_pcap_files(directory):
@@ -19,17 +19,16 @@ def process_pcap_files(directory):
             print(f"Error processing pcap files: {e}")
         finally:
             # Cleanup the temporary directory
-            shutil.rmtree(temp_dir)        
+            shutil.rmtree(temp_dir)
 
 def process_pcap_file(file_path):
     try:
-        #available models to use
-        # GPT4All-13B-snoozy.ggmlv3.q4_0.bin
-        # nous-hermes-13b.ggmlv3.q4_0.bin
-        # ggml-mpt-7b-instruct
-        gptj = gpt4all.GPT4All('GPT4All-13B-snoozy.ggmlv3.q4_0.bin')
-        gptj.model.set_thread_count(4)
-        #gptj = gpt4all.GPT4All(os.environ['GPT_MODEL_NAME'])
+        # available models to use
+        # GPT4All-13B-snoozy.ggmlv3.q4_0
+        # nous-hermes-13b.ggmlv3.q4_0
+        gptj = AiModel("TheBloke/orca_mini_13B-GPTQ")
+        gptj.model.set_thread_count(6)
+        # gptj = gpt4all.GPT4All(os.environ['GPT_MODEL_NAME'])
 
         packets = rdpcap(file_path)
         file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
@@ -38,16 +37,16 @@ def process_pcap_file(file_path):
             os.remove(result_file_path)
         # Iterate over each packet and extract streams
         with open(result_file_path, 'w', encoding="utf-8") as f:
-            print(gptj.generate(generate_first_prompt(),streaming=True), file=f)
-            print("-"*40,file=f)
+            print(gptj.generate(generate_first_prompt()), file=f)
+            print("-" * 40, file=f)
             for packet in packets:
                 # Create packet input dictionary
                 summary = packet.summary()
                 print(f"Sending Prompt: {generate_prompt(summary)}\n\n", file=f)
-                print(gptj.generate(generate_prompt(summary),streaming=True), file=f)
-                print("-"*40,file=f)
+                print(gptj.generate(generate_prompt(summary)), file=f)
+                print("-" * 40, file=f)
                 f.flush()
-            f.close()    
+            f.close()
         print(f"Processed: {file_path}")
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
