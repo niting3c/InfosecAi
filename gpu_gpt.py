@@ -1,18 +1,28 @@
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
 
 
 class AiModel():
-    def __init__(self, llama_path=None):
+    def __init__(self, llama_path=None,model_base_name=None):
         if llama_path is None:
             raise ValueError('Please pass a path to your alpaca model.')
 
         self.model_path = llama_path
         self.tokenizer_path = llama_path
         self.lora_path = 'nomic-ai/vicuna-lora-multi-turn_epoch_2'
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_path,
-                                                          device_map="auto")
-        self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path)
+        
+        self.model = AutoGPTQForCausalLM.from_quantized(llama_path,
+                                model_basename=model_base_name,
+                                use_safetensors=True,
+                                trust_remote_code=True,
+                                device="cuda:0",
+                                use_triton=False,
+                                quantize_config=None)        
+        
+        self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path,use_fast=True)
+        
+        
         added_tokens = self.tokenizer.add_special_tokens(
             {"bos_token": "<s>", "eos_token": "</s>", "pad_token": "<pad>"})
 
@@ -26,11 +36,10 @@ class AiModel():
             generate_config = {}
 
         input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.model.device)
-        outputs = self.model.generate(input_ids=input_ids,
-                                      **generate_config)
+        outputs = self.model.generate(inputs=input_ids, temperature=0.7)
 
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
         return decoded[len(prompt):]
 
-def NewAiModel(path):
-    return AiModel(path)    
+def NewAiModel(path,base):
+    return AiModel(path,base)    

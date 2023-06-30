@@ -4,6 +4,7 @@ import gpt4all
 from packet_parser import summarize_streams
 from gpu_gpt import NewAiModel
 
+
 def generate_prompt(packet):
     return """
     ### Instructions:
@@ -18,13 +19,14 @@ def generate_prompt(packet):
     ### Response:
     """.format(packet)
 
-def process_files(directory, file_extension, model_path, processor,suffix=None):
+
+def process_files(directory, file_extension, model_path, processor, suffix=None, gpu=False, base_path=None):
     try:
         for root, dirs, files in os.walk(directory):
             for file_name in files:
                 if file_name.endswith(file_extension):
                     file_path = os.path.join(root, file_name)
-                    processor(file_path, model_path,suffix)
+                    processor(file_path, model_path, suffix, gpu, base_path)
     except Exception as e:
         print(f"Error processing files: {e}")
 
@@ -34,14 +36,23 @@ def get_file_path(root, file_name):
 
 
 def create_gpt_model(model_name):
-    gptj= NewAiModel(model_name)
-    #gptj = gpt4all.GPT4All(model_name)
+    gptj = gpt4all.GPT4All(model_name)
+    gptj.model.set_thread_count(4)
+    return gptj
+
+
+def create_gpu_gpt_model(model_name, base_path=None):
+    if '' == base_path or None == base_path:
+        base_path = model_name
+    gptj = NewAiModel(model_name, base_path)
+    # gptj = gpt4all.GPT4All(model_name)
     gptj.model.set_thread_count(4)
     return gptj
 
 
 def create_result_file_path(file_path, extension):
-    file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
+    file_name_without_extension = os.path.splitext(
+        os.path.basename(file_path))[0]
     return os.path.join('./output/' + file_name_without_extension + extension)
 
 
@@ -57,10 +68,15 @@ def analyze_streams(file_path, result_file_path, gptj=None):
         f.close()
 
 
-def process_pcap_file(file_path, model_path,suffix=""):
+def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=None):
     try:
-        gptj = create_gpt_model(model_path)
-        result_file_path = create_result_file_path(file_path, '-'+suffix+'.txt')
+        gptj=None
+        if gpu:
+            gptj = create_gpu_gpt_model(model_path, base_path)
+        else:    
+            gptj = create_gpt_model(model_path)
+        result_file_path = create_result_file_path(
+            file_path, '-'+suffix+'.txt')
         if os.path.isfile(result_file_path):
             os.remove(result_file_path)
         analyze_streams(file_path, result_file_path, gptj)
@@ -74,17 +90,21 @@ def process_pcap_file(file_path, model_path,suffix=""):
 # nous-hermes-13b.ggmlv3.q4_0
 # Usage: Call the process_files function with the path to the directory containing the PCAP files
 
-#Non-GPU Library used , default Gpt4all
-#process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
+# Non-GPU Library used , default Gpt4all
+# process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
 
-#process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
+# process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
 
-#process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0', process_pcap_file,"nous-hermes")
+# process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0', process_pcap_file,"nous-hermes")
 
 
-#custom nomic code technically gpt4all but uses transformers instead
-process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
+# custom nomic code technically gpt4all but uses transformers instead
+# TheBloke/airoboros-7b-gpt4-fp16 has 4096 context size
+process_files('./inputs/', ".pcap", 'TheBloke/airoboros-7b-gpt4-fp16',
+              process_pcap_file, "airoboros")
 
-process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
+process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0',
+              process_pcap_file, "orca")
 
-process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0', process_pcap_file,"nous-hermes")
+process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0',
+              process_pcap_file, "nous-hermes")
