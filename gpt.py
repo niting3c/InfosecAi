@@ -58,7 +58,7 @@ def analyze_streams(file_path, result_file_path, gptj=None):
 def process_pcap_file(file_path, model_path,suffix=""):
     try:
         gptj = create_gpt_model(model_path)
-        result_file_path = create_result_file_path(file_path, '-'suffix+'.txt')
+        result_file_path = create_result_file_path(file_path, '-'+suffix+'.txt')
         if os.path.isfile(result_file_path):
             os.remove(result_file_path)
         analyze_streams(file_path, result_file_path, gptj)
