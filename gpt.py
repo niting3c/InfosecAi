@@ -2,6 +2,7 @@ import os
 
 import gpt4all
 from packet_parser import summarize_streams
+from gpu_gpt import NewAiModel
 
 def generate_prompt(packet):
     return """
@@ -33,7 +34,8 @@ def get_file_path(root, file_name):
 
 
 def create_gpt_model(model_name):
-    gptj = gpt4all.GPT4All(model_name)
+    gptj= NewAiModel(model_name)
+    #gptj = gpt4all.GPT4All(model_name)
     gptj.model.set_thread_count(4)
     return gptj
 
@@ -71,9 +73,18 @@ def process_pcap_file(file_path, model_path,suffix=""):
 # GPT4All-13B-snoozy.ggmlv3.q4_0
 # nous-hermes-13b.ggmlv3.q4_0
 # Usage: Call the process_files function with the path to the directory containing the PCAP files
+
+#Non-GPU Library used , default Gpt4all
+#process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
+
+#process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
+
+#process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0', process_pcap_file,"nous-hermes")
+
+
+#custom nomic code technically gpt4all but uses transformers instead
 process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
 
 process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
 
 process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0', process_pcap_file,"nous-hermes")
-
