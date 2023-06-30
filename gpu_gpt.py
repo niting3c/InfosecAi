@@ -1,6 +1,6 @@
 
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
+from transformers import AutoTokenizer,AutoModelForCausalLM
+from auto_gptq import AutoGPTQForCausalLM
 
 
 class AiModel():
@@ -12,15 +12,21 @@ class AiModel():
         self.tokenizer_path = llama_path
         self.lora_path = 'nomic-ai/vicuna-lora-multi-turn_epoch_2'
         
-        self.model = AutoGPTQForCausalLM.from_quantized(llama_path,
-                                model_basename=model_base_name,
+        self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path)
+        
+        
+        if '' == model_base_name or None == model_base_name:
+            self.model = AutoModelForCausalLM.from_pretrained(llama_path,trust_remote_code=True)        
+        else: 
+            self.model = AutoGPTQForCausalLM.from_quantized(llama_path,
                                 use_safetensors=True,
                                 trust_remote_code=True,
                                 device="cuda:0",
                                 use_triton=False,
-                                quantize_config=None)        
+                                model_basename=model_base_name,
+                                quantize_config=None)  
         
-        self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path,use_fast=True)
+       
         
         
         added_tokens = self.tokenizer.add_special_tokens(

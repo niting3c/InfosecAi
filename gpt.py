@@ -62,7 +62,16 @@ def analyze_streams(file_path, result_file_path, gptj=None):
         for stream_index, stream in streams.items():
             print(f"Stream {stream_index}:\n{stream}", file=f)
             prompt = generate_prompt(str(stream))
-            print(gptj.generate(prompt), file=f)
+            
+            try:
+                if gptj:
+                    generated_text = gptj.generate(prompt)
+                else:
+                    generated_text = "ERROR: GPT-J model not provided."
+            except Exception as e:
+                generated_text = f"ERROR: {str(e)}"
+            
+            print(generated_text, file=f)
             print("-" * 40, file=f)
             f.flush()
         f.close()
@@ -91,7 +100,7 @@ def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=Non
 # Usage: Call the process_files function with the path to the directory containing the PCAP files
 
 # Non-GPU Library used , default Gpt4all
-# process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
+process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
 
 # process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
 
@@ -101,10 +110,7 @@ def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=Non
 # custom nomic code technically gpt4all but uses transformers instead
 # TheBloke/airoboros-7b-gpt4-fp16 has 4096 context size
 process_files('./inputs/', ".pcap", 'TheBloke/airoboros-7b-gpt4-fp16',
-              process_pcap_file, "airoboros")
+              process_pcap_file, "airoboros",True)
 
-process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0',
-              process_pcap_file, "orca")
-
-process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0',
-              process_pcap_file, "nous-hermes")
+process_files('./inputs/', ".pcap", 'TheBloke/Nous-Hermes-13B-GPTQ',
+              process_pcap_file, "nous-hermes",True,"nous-hermes-13b-GPTQ-4bit-128g.no-act.order")
