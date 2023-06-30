@@ -13,6 +13,7 @@ def generate_prompt(packet):
     As an AI model specialized in detecting malicious activity, you should carefully examine the payload and follow a step-by-step analysis.
     Your response should be a concise categorization: either `Malicious` or `Not Malicious`.
     Avoid providing additional information or context beyond this categorization.
+    Note: Empty payload is not malicious
     ### Prompt:
     Analyze the content of the following packet stream:
     {0}
