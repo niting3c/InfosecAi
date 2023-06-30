@@ -7,8 +7,10 @@ def generate_prompt(packet):
     return """
     ### Instructions:
     [AI Smart TCP/UDP Packet Stream Analyzer]
-    Your task is to analyze the provided TCP/UDP packet stream and determine if it is malicious or not. As an AI model specialized in detecting malicious activity, you should carefully examine the payload and follow a step-by-step analysis.
-    Your response should be a concise categorization: either `Malicious` or `Not Malicious`. Avoid providing additional information or context beyond this categorization.
+    Your task is to analyze the provided TCP/UDP packet stream in the prompt and determine if it is malicious or not. 
+    As an AI model specialized in detecting malicious activity, you should carefully examine the payload and follow a step-by-step analysis.
+    Your response should be a concise categorization: either `Malicious` or `Not Malicious`.
+    Avoid providing additional information or context beyond this categorization.
     ### Prompt:
     Analyze the content of the following packet stream:
     {0}
