@@ -34,7 +34,3 @@ Thumbs.db
 *.log
 *.cache
 *.out
-
-# Ignore the output directory for generated JSON files
-/output/
-output.json
