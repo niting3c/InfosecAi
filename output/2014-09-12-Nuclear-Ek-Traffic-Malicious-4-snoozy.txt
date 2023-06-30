@@ -10,3 +10,9 @@ Stream TCP_1:
 
  Not Malicious
 ----------------------------------------
+Stream TCP_2:
+  Protocol: tcp
+  Payload: 
+
+ Not Malicious
+----------------------------------------
