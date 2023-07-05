@@ -3,7 +3,7 @@ import os
 
 from scapy.all import rdpcap, wrpcap, Raw
 from scapy.layers.dns import DNS
-from scapy.layers.http import HTTP
+from scapy.layers.http import HTTPRequest, HTTPResponse
 from scapy.layers.inet import TCP
 from scapy.packet import Padding
 from termcolor import colored
@@ -49,10 +49,15 @@ def get_readable_payload(packet):
         dst_port = packet[TCP].dport
         payload_info += "\nTCP Layer: Src Port = " + str(src_port) + ", Dst Port = " + str(dst_port)
 
-    # If the packet has HTTP layer
-    elif packet.haslayer(HTTP):
-        http_info = packet[HTTP].fields
-        payload_info += "\nHTTP Layer: " + str(http_info)
+    # If the packet has HTTPRequest layer
+    elif packet.haslayer(HTTPRequest):
+        http_request_info = packet[HTTPRequest].fields
+        payload_info += "\nHTTPRequest Layer: " + str(http_request_info)
+
+    # If the packet has HTTPResponse layer
+    elif packet.haslayer(HTTPResponse):
+        http_response_info = packet[HTTPResponse].fields
+        payload_info += "\nHTTPResponse Layer: " + str(http_response_info)
 
     # If the packet has DNS layer
     elif packet.haslayer(DNS):
