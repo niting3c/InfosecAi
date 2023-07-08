@@ -44,7 +44,7 @@ def print_token_data(filename, tokenizer, count_obj={}):
 # Initialize OpenAI tokenizer
 tokenizer = AutoTokenizer.from_pretrained("openchat/openchat_v2_w")
 counter = {}
-process_files("./inputs", tokenizer, counter)
+process_files("inputs/", tokenizer, counter)
 
 # Extract the filenames and token counts from the counter dictionary
 filenames = list(counter.keys())
