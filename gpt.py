@@ -1,46 +1,13 @@
 import os
-import pyshark
+
 import gpt4all
+import pyshark
+import transformers
 from gpu_gpt import NewAiModel
+import matplotlib.pyplot as plt
 
 
-def generate_first_prompt(packet_count):
-    """
-    Generate the initial prompt for the AI model.
-    """
-    return """
-        You are an advanced AI that detects malicious requests by parsing the various payloads of the protocols.
-        Please analyze the {0} packets provided in the follow-up prompts 
-        and determine if each packet is malicious or not. 
-        Consider examining the payload, headers, and protocols in a step-by-step analysis.
-        Your response should be a concise categorization of either "Malicious" or "Not Malicious". 
-        Do not provide any additional information or context beyond this categorization. 
-        Note that an empty payload is not considered malicious.
-        As an AI model specialized in detecting malicious activity or network attacks, 
-        you should carefully examine the payload and follow a step-by-step analysis.
-        Avoid providing additional information or context beyond this categorization.
-        The prompt for each packet will be provided after this instruction.
-        ### Response:
-    """.format(packet_count)
-
-
-def generate_prompt(protocol, payload):
-    """
-    Generate a prompt for each packet based on protocol and payload.
-    """
-    return """
-    ### Instructions:
-    Your Task is to determine whether the below prompt containing Protocol and payload is a malicious
-    request or not? Follow the instructions provided in the beginning.
-    Your response should be a concise categorization either: `Malicious` or `Not Malicious`.
-    ### Prompt:
-    protocol:{0}
-    payload:{1}
-    ### Response:
-    """.format(protocol, payload)
-
-
-def process_files(directory, file_extension, model_path, processor, suffix=None, gpu=False, base_path=None):
+def process_files(directory, file_extension, model_path, suffix=None, gpu=False, base_path=None):
     """
     Recursively process files in the given directory with the specified file extension.
     """
@@ -49,7 +16,7 @@ def process_files(directory, file_extension, model_path, processor, suffix=None,
             for file_name in files:
                 if file_name.endswith(file_extension):
                     file_path = os.path.join(root, file_name)
-                    processor(file_path, model_path, suffix, gpu, base_path)
+                    process_pcap_file(file_path, model_path, suffix, gpu, base_path)
     except Exception as e:
         print(f"Error processing files: {e}")
 
@@ -135,9 +102,14 @@ def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=Non
         if os.path.isfile(result_file_path):
             os.remove(result_file_path)
         analyze_streams(file_path, result_file_path, gpt_model)
+        print_token_data(file_path)
         print(f"Processed: {file_path}")
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
+
+
+# process files based on models
+# process with lates open
 
 
 # available models to use
@@ -146,7 +118,7 @@ def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=Non
 # Usage: Call the process_files function with the path to the directory containing the PCAP files
 
 # Non-GPU Library used, default Gpt4all
-process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file, "snoozy")
+process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', "snoozy")
 
 # process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
 
@@ -156,7 +128,7 @@ process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pc
 # custom nomic code technically gpt4all but uses transformers instead
 # TheBloke/airoboros-7b-gpt4-fp16 has 4096 context size
 process_files('./inputs/', ".pcap", 'TheBloke/airoboros-7b-gpt4-fp16',
-              process_pcap_file, "airoboros", True)
+              "airoboros", True)
 
 process_files('./inputs/', ".pcap", 'TheBloke/Nous-Hermes-13B-GPTQ',
-              process_pcap_file, "nous-hermes", True, "nous-hermes-13b-GPTQ-4bit-128g.no-act.order")
+              "nous-hermes", True, "nous-hermes-13b-GPTQ-4bit-128g.no-act.order")
