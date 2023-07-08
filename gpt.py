@@ -1,33 +1,38 @@
 import os
-
-import gpt4all
 import pyshark
-
+import gpt4all
 from gpu_gpt import NewAiModel
 
 
 def generate_first_prompt(packet_count):
+    """
+    Generate the initial prompt for the AI model.
+    """
     return """
         You are an advanced AI that detects malicious requests by parsing the various payloads of the protocols.
         Please analyze the {0} packets provided in the follow-up prompts 
         and determine if each packet is malicious or not. 
         Consider examining the payload, headers, and protocols in a step-by-step analysis.
-        Your response should be a concise categorization of either \"Malicious\" or \"Not Malicious\". 
+        Your response should be a concise categorization of either "Malicious" or "Not Malicious". 
         Do not provide any additional information or context beyond this categorization. 
         Note that an empty payload is not considered malicious.
-        As an AI model specialized in detecting malicious activity or network attacks you should carefully examine the payload and follow a step-by-step analysis.
+        As an AI model specialized in detecting malicious activity or network attacks, 
+        you should carefully examine the payload and follow a step-by-step analysis.
         Avoid providing additional information or context beyond this categorization.
         The prompt for each packet will be provided after this instruction.
-        ###Response:
+        ### Response:
     """.format(packet_count)
 
 
 def generate_prompt(protocol, payload):
+    """
+    Generate a prompt for each packet based on protocol and payload.
+    """
     return """
     ### Instructions:
-    Your Task is to determine whether the below prompt containing Protocol and payload,is a malicious
+    Your Task is to determine whether the below prompt containing Protocol and payload is a malicious
     request or not? Follow the instructions provided in the beginning.
-    Your response should be a concise categorization either : `Malicious` or `Not Malicious`.
+    Your response should be a concise categorization either: `Malicious` or `Not Malicious`.
     ### Prompt:
     protocol:{0}
     payload:{1}
@@ -36,6 +41,9 @@ def generate_prompt(protocol, payload):
 
 
 def process_files(directory, file_extension, model_path, processor, suffix=None, gpu=False, base_path=None):
+    """
+    Recursively process files in the given directory with the specified file extension.
+    """
     try:
         for root, dirs, files in os.walk(directory):
             for file_name in files:
@@ -47,31 +55,44 @@ def process_files(directory, file_extension, model_path, processor, suffix=None,
 
 
 def get_file_path(root, file_name):
+    """
+    Get the full file path given the root directory and file name.
+    """
     return os.path.join(root, file_name)
 
 
 def create_gpt_model(model_name):
-    gptj = gpt4all.GPT4All(model_name)
-    gptj.model.set_thread_count(4)
-    return gptj
+    """
+    Create a GPT model instance.
+    """
+    gpt_model = gpt4all.GPT4All(model_name)
+    gpt_model.model.set_thread_count(4)
+    return gpt_model
 
 
 def create_gpu_gpt_model(model_name, base_path=None):
-    if '' == base_path or None == base_path:
+    """
+    Create a GPU GPT model instance.
+    """
+    if base_path == '' or base_path is None:
         base_path = model_name
-    gptj = NewAiModel(model_name, base_path)
-    # gptj = gpt4all.GPT4All(model_name)
-    gptj.model.set_thread_count(4)
-    return gptj
+    gpu_gpt_model = NewAiModel(model_name, base_path)
+    gpu_gpt_model.model.set_thread_count(4)
+    return gpu_gpt_model
 
 
 def create_result_file_path(file_path, extension):
-    file_name_without_extension = os.path.splitext(
-        os.path.basename(file_path))[0]
-    return os.path.join('./output/' + file_name_without_extension + extension)
+    """
+    Create the result file path based on the original file path and the desired extension.
+    """
+    file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
+    return os.path.join('./output/', file_name_without_extension + extension)
 
 
-def analyze_streams(file_path, result_file_path, gptj=None):
+def analyze_streams(file_path, result_file_path, gpt_model=None):
+    """
+    Analyze packet streams in the given file and generate responses using the AI model.
+    """
     cap = pyshark.FileCapture(file_path, keep_packets=False)
     with open(result_file_path, 'w', encoding="utf-8") as f:
         for packet in cap:
@@ -86,7 +107,7 @@ def analyze_streams(file_path, result_file_path, gptj=None):
                     protocol = packet.frame_info.protocol
                     print("Protocol:", protocol)
 
-                generated_text = gptj.generate(generate_prompt(protocol, payload))
+                generated_text = gpt_model.generate(generate_prompt(protocol, payload))
 
             except AttributeError:
                 pass
@@ -96,22 +117,24 @@ def analyze_streams(file_path, result_file_path, gptj=None):
                 print(generated_text, file=f)
                 print("-" * 40, file=f)
                 f.flush()
-        cap.close()
-        f.close()
+    cap.close()  # Close the capture file handle
+    f.close()  # Close the result file handle
 
 
 def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=None):
+    """
+    Process a single PCAP file using the specified model and generate the result file.
+    """
     try:
-        gptj = None
+        gpt_model = None
         if gpu:
-            gptj = create_gpu_gpt_model(model_path, base_path)
+            gpt_model = create_gpu_gpt_model(model_path, base_path)
         else:
-            gptj = create_gpt_model(model_path)
-        result_file_path = create_result_file_path(
-            file_path, '-' + suffix + '.txt')
+            gpt_model = create_gpt_model(model_path)
+        result_file_path = create_result_file_path(file_path, '-' + suffix + '.txt')
         if os.path.isfile(result_file_path):
             os.remove(result_file_path)
-        analyze_streams(file_path, result_file_path, gptj)
+        analyze_streams(file_path, result_file_path, gpt_model)
         print(f"Processed: {file_path}")
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
@@ -122,7 +145,7 @@ def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=Non
 # nous-hermes-13b.ggmlv3.q4_0
 # Usage: Call the process_files function with the path to the directory containing the PCAP files
 
-# Non-GPU Library used , default Gpt4all
+# Non-GPU Library used, default Gpt4all
 process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file, "snoozy")
 
 # process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
