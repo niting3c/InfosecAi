@@ -1,8 +1,8 @@
 import os
+from pprint import pprint
 
-import matplotlib.pyplot as plt
-import pyshark
-from transformers import AutoTokenizer
+import tiktoken
+from scapy.all import rdpcap
 
 
 def process_files(directory, tokenizer, counter):
@@ -20,42 +20,55 @@ def process_files(directory, tokenizer, counter):
 
 
 def print_token_data(filename, tokenizer, count_obj={}):
-    packets = pyshark.FileCapture(filename, keep_packets=False)
+    packets = rdpcap(filename)
+
     max = 0
     for packet in packets:
         try:
-            # Check if the packet has a payload
-            if 'data' in packet:
-                payload = packet.data.data
-                # Tokenize the payload
-                tokens = tokenizer.encode(payload)
-                # Add token count and filename to respective lists
-                if max < len(tokens):
-                    max = len(tokens)
-                count_obj[filename] = max
+            payload = ''
+            if packet.haslayer('IP'):
+                if 'Raw' in packet['IP']:
+                    payload = packet['IP']['Raw'].load
+                else:
+                    payload = packet['IP'].payload
+            elif packet.haslayer('TCP'):
+                if 'Raw' in packet['TCP']:
+                    payload = packet['TCP']['Raw'].load
+                elif packet['TCP'].haslayer('FTP'):
+                    if 'Raw' in packet['TCP']['FTP']:
+                        payload = packet['TCP']['FTP']['Raw'].load
+                    else:
+                        payload = packet['TCP']['FTP'].payload
+                else:
+                    payload = packet['TCP'].payload
+            elif packet.haslayer('UDP'):
+                if 'Raw' in packet['UDP']:
+                    payload = packet['UDP']['Raw'].load
+                else:
+                    payload = packet['UDP'].payload
+            elif packet.haslayer('ICMP'):
+                if 'Raw' in packet['ICMP']:
+                    payload = packet['ICMP']['Raw'].load
+                else:
+                    payload = packet['ICMP'].payload
+            else:
+                payload = "Unknown protocol or No Payload"
+
+            print(packet.summary())
+            print(payload)  # print raw payload data
+            print("---" * 40)
+            tokens = tokenizer.encode(str(payload))
+            if max < len(tokens):
+                max = len(tokens)
+            count_obj[filename] = max
         except AttributeError:
-            pass
+            continue
         except Exception as e:
             print(f"Error processing packet: {e}")
-    # Close the capture file handle
-    packets.close()
 
 
 # Initialize OpenAI tokenizer
-tokenizer = AutoTokenizer.from_pretrained("openchat/openchat_v2_w")
+enc = tiktoken.encoding_for_model("gpt-4")
 counter = {}
-process_files("inputs/", tokenizer, counter)
-
-# Extract the filenames and token counts from the counter dictionary
-filenames = list(counter.keys())
-token_counts = list(counter.values())
-
-# Generate the token count graph
-plt.figure(figsize=(10, 6))
-plt.plot(filenames, token_counts, marker='o')
-plt.xlabel('Filename')
-plt.ylabel('Token Count')
-plt.title('Number of max Tokens in Each File')
-plt.xticks(rotation=90)
-plt.tight_layout()
-plt.show()
+process_files("./inputs", enc, counter)
+pprint(counter)
