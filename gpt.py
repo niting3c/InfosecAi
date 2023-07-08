@@ -1,24 +1,38 @@
 import os
 
 import gpt4all
-from packet_parser import summarize_streams
+import pyshark
+
 from gpu_gpt import NewAiModel
 
 
-def generate_prompt(packet):
+def generate_first_prompt(packet_count):
+    return """
+        You are an advanced AI that detects malicious requests by parsing the various payloads of the protocols.
+        Please analyze the {0} packets provided in the follow-up prompts 
+        and determine if each packet is malicious or not. 
+        Consider examining the payload, headers, and protocols in a step-by-step analysis.
+        Your response should be a concise categorization of either \"Malicious\" or \"Not Malicious\". 
+        Do not provide any additional information or context beyond this categorization. 
+        Note that an empty payload is not considered malicious.
+        As an AI model specialized in detecting malicious activity or network attacks you should carefully examine the payload and follow a step-by-step analysis.
+        Avoid providing additional information or context beyond this categorization.
+        The prompt for each packet will be provided after this instruction.
+        ###Response:
+    """.format(packet_count)
+
+
+def generate_prompt(protocol, payload):
     return """
     ### Instructions:
-    [AI Smart TCP/UDP Packet Stream Analyzer]
-    Your task is to analyze the provided TCP/UDP packet stream in the prompt and determine if it is malicious or not. 
-    As an AI model specialized in detecting malicious activity, you should carefully examine the payload and follow a step-by-step analysis.
-    Your response should be a concise categorization: either `Malicious` or `Not Malicious`.
-    Avoid providing additional information or context beyond this categorization.
-    Note: Empty payload is not malicious
+    Your Task is to determine whether the below prompt containing Protocol and payload,is a malicious
+    request or not? Follow the instructions provided in the beginning.
+    Your response should be a concise categorization either : `Malicious` or `Not Malicious`.
     ### Prompt:
-    Analyze the content of the following packet stream:
-    {0}
+    protocol:{0}
+    payload:{1}
     ### Response:
-    """.format(packet)
+    """.format(protocol, payload)
 
 
 def process_files(directory, file_extension, model_path, processor, suffix=None, gpu=False, base_path=None):
@@ -58,35 +72,43 @@ def create_result_file_path(file_path, extension):
 
 
 def analyze_streams(file_path, result_file_path, gptj=None):
-    streams = summarize_streams(file_path)
+    cap = pyshark.FileCapture(file_path, keep_packets=False)
     with open(result_file_path, 'w', encoding="utf-8") as f:
-        for stream_index, stream in streams.items():
-            print(f"Stream {stream_index}:\n{stream}", file=f)
-            prompt = generate_prompt(str(stream))
-            
+        for packet in cap:
             try:
-                if gptj:
-                    generated_text = gptj.generate(prompt)
-                else:
-                    generated_text = "ERROR: GPT-J model not provided."
+                # Check if the packet has a payload
+                if 'data' in packet:
+                    payload = packet.data.data
+                    print("Payload:", payload)
+
+                # Check if the packet has a protocol type
+                if 'frame_info' in packet:
+                    protocol = packet.frame_info.protocol
+                    print("Protocol:", protocol)
+
+                generated_text = gptj.generate(generate_prompt(protocol, payload))
+
+            except AttributeError:
+                pass
             except Exception as e:
                 generated_text = f"ERROR: {str(e)}"
-            
-            print(generated_text, file=f)
-            print("-" * 40, file=f)
-            f.flush()
+            finally:
+                print(generated_text, file=f)
+                print("-" * 40, file=f)
+                f.flush()
+        cap.close()
         f.close()
 
 
 def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=None):
     try:
-        gptj=None
+        gptj = None
         if gpu:
             gptj = create_gpu_gpt_model(model_path, base_path)
-        else:    
+        else:
             gptj = create_gpt_model(model_path)
         result_file_path = create_result_file_path(
-            file_path, '-'+suffix+'.txt')
+            file_path, '-' + suffix + '.txt')
         if os.path.isfile(result_file_path):
             os.remove(result_file_path)
         analyze_streams(file_path, result_file_path, gptj)
@@ -101,7 +123,7 @@ def process_pcap_file(file_path, model_path, suffix="", gpu=False, base_path=Non
 # Usage: Call the process_files function with the path to the directory containing the PCAP files
 
 # Non-GPU Library used , default Gpt4all
-process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file,"snoozy")
+process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pcap_file, "snoozy")
 
 # process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
 
@@ -111,7 +133,7 @@ process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', process_pc
 # custom nomic code technically gpt4all but uses transformers instead
 # TheBloke/airoboros-7b-gpt4-fp16 has 4096 context size
 process_files('./inputs/', ".pcap", 'TheBloke/airoboros-7b-gpt4-fp16',
-              process_pcap_file, "airoboros",True)
+              process_pcap_file, "airoboros", True)
 
 process_files('./inputs/', ".pcap", 'TheBloke/Nous-Hermes-13B-GPTQ',
-              process_pcap_file, "nous-hermes",True,"nous-hermes-13b-GPTQ-4bit-128g.no-act.order")
+              process_pcap_file, "nous-hermes", True, "nous-hermes-13b-GPTQ-4bit-128g.no-act.order")
