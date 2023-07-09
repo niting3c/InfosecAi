@@ -3,38 +3,6 @@ import os
 import pyshark
 
 
-def process_files(directory, file_extension, model_path, suffix=None, gpu=False, base_path=None):
-    """
-    Recursively process files in the given directory with the specified file extension.
-    """
-    try:
-        for root, dirs, files in os.walk(directory):
-            for file_name in files:
-                if file_name.endswith(file_extension):
-                    file_path = os.path.join(root, file_name)
-                    process_pcap_file(file_path, model_path, suffix, gpu, base_path)
-    except Exception as e:
-        print(f"Error processing files: {e}")
-
-
-def get_file_path(root, file_name):
-    """
-    Get the full file path given the root directory and file name.
-    """
-    return os.path.join(root, file_name)
-
-
-
-
-
-
-def create_result_file_path(file_path, extension):
-    """
-    Create the result file path based on the original file path and the desired extension.
-    """
-    file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
-    return os.path.join('./output/', file_name_without_extension + extension)
-
 
 def analyze_streams(file_path, result_file_path, gpt_model=None):
     """

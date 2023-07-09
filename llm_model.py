@@ -24,3 +24,7 @@ def create_gpu_gpt_model(model_name, base_path=None):
     gpu_gpt_model = NewAiModel(model_name, base_path)
     gpu_gpt_model.model.set_thread_count(4)
     return gpu_gpt_model
+
+
+def send_to_model(protocol, payload,model,pipeline):
+    print("do somethign here")
