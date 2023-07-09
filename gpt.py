@@ -1,10 +1,6 @@
 import os
 
-import gpt4all
 import pyshark
-import transformers
-from gpu_gpt import NewAiModel
-import matplotlib.pyplot as plt
 
 
 def process_files(directory, file_extension, model_path, suffix=None, gpu=False, base_path=None):
@@ -28,24 +24,8 @@ def get_file_path(root, file_name):
     return os.path.join(root, file_name)
 
 
-def create_gpt_model(model_name):
-    """
-    Create a GPT model instance.
-    """
-    gpt_model = gpt4all.GPT4All(model_name)
-    gpt_model.model.set_thread_count(4)
-    return gpt_model
 
 
-def create_gpu_gpt_model(model_name, base_path=None):
-    """
-    Create a GPU GPT model instance.
-    """
-    if base_path == '' or base_path is None:
-        base_path = model_name
-    gpu_gpt_model = NewAiModel(model_name, base_path)
-    gpu_gpt_model.model.set_thread_count(4)
-    return gpu_gpt_model
 
 
 def create_result_file_path(file_path, extension):
