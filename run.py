@@ -1,8 +1,10 @@
 
 
 
+#available models and wether pipeline is available:
 
-
+# 1. "openchat/openchat_8192" : pipeline available
+# 2.
 
 
 # process files based on models
