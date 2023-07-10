@@ -3,6 +3,6 @@ channels:
   - defaults
 dependencies:
   - python=3.9.5
-  - transformers=4.30.0
-  - scapy=2.5.0
+  - transformers
+  - scapy
 
