@@ -3,7 +3,8 @@ import os
 
 from scapy.utils import rdpcap
 
-from llm_model import send_to_model
+from PromptMaker import generate_first_prompt
+from llm_model import send_to_model, process_string_input
 from utils import create_result_file_path
 
 logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
@@ -27,7 +28,7 @@ def process_files(directory, model, pipeline=False):
         print(f"Error processing files: {e}")
 
 
-def analyse_packet(file_path,model,pipeline):
+def analyse_packet(file_path, model, pipeline):
     """
     Analyzes a pcap file and extracts packet information for further processing.
 
@@ -38,6 +39,8 @@ def analyse_packet(file_path,model,pipeline):
     with open(result_file_path, 'w', encoding="utf-8") as output_file:
         try:
             packets = rdpcap(file_path)
+            # send initial prompt to model
+            process_string_input(generate_first_prompt(len(packets)), model, pipeline, output_file)
             for packet in packets:
                 if packet.haslayer('IP'):
                     if packet.haslayer('Raw'):
@@ -72,7 +75,7 @@ def analyse_packet(file_path,model,pipeline):
                     protocol = "unknown"
                     payload = "Unknown protocol or No Payload"
 
-                send_to_model(protocol, payload,model,pipeline)
+                send_to_model(protocol, payload, model, pipeline, output_file)
         except AttributeError:
             pass
         except Exception as e:
