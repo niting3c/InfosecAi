@@ -1,33 +1,14 @@
+from transformers import pipeline
 
+from pcap_operations import process_files
 
+deep_night_research_classifier = pipeline("zero-shot-classification", model="deepnight-research/zsc-text")
+facebook_bart_large_mnli_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+Deberta_mnli_anli_classifier = pipeline("zero-shot-classification",
+                                        model="MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli")
+deberta_tasksource_nli_classifier = pipeline("zero-shot-classification", model="sileod/deberta-v3-base-tasksource-nli")
 
-#available models and wether pipeline is available:
-
-# 1. "openchat/openchat_8192" : pipeline available
-# 2.
-
-
-# process files based on models
-# process with lates open
-
-
-# available models to use
-# GPT4All-13B-snoozy.ggmlv3.q4_0
-# nous-hermes-13b.ggmlv3.q4_0
-# Usage: Call the process_files function with the path to the directory containing the PCAP files
-
-# Non-GPU Library used, default Gpt4all
-process_files('./inputs/', ".pcap", 'GPT4All-13B-snoozy.ggmlv3.q4_0', "snoozy")
-
-# process_files('./inputs/', ".pcap", 'orca-mini-13b.ggmlv3.q4_0', process_pcap_file,"orca")
-
-# process_files('./inputs/', ".pcap", 'nous-hermes-13b.ggmlv3.q4_0', process_pcap_file,"nous-hermes")
-
-
-# custom nomic code technically gpt4all but uses transformers instead
-# TheBloke/airoboros-7b-gpt4-fp16 has 4096 context size
-process_files('./inputs/', ".pcap", 'TheBloke/airoboros-7b-gpt4-fp16',
-              "airoboros", True)
-
-process_files('./inputs/', ".pcap", 'TheBloke/Nous-Hermes-13B-GPTQ',
-              "nous-hermes", True, "nous-hermes-13b-GPTQ-4bit-128g.no-act.order")
+process_files('./inputs', deep_night_research_classifier)
+process_files('./inputs', facebook_bart_large_mnli_classifier)
+process_files('./inputs', Deberta_mnli_anli_classifier)
+process_files('./inputs', deberta_tasksource_nli_classifier)

@@ -17,7 +17,7 @@ def generate_first_prompt(packet_count):
         Your response should be a concise categorization of either "Malicious" or "Not Malicious". 
         Do not provide any additional information or context beyond this categorization. 
         Note that an empty payload is not considered malicious.
-        As an AI model specialized in detecting malicious activity or network attacks, 
+        As an AI classifier specialized in detecting malicious activity or network attacks, 
         you should carefully examine the payload and follow a step-by-step analysis.
         Avoid providing additional information or context beyond this categorization.
         If even One of the packet is malicious , mark the whole pcap file as malicious.

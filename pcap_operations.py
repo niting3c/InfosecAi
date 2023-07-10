@@ -10,7 +10,7 @@ from utils import create_result_file_path
 logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
 
 
-def process_files(directory, model, pipeline=False):
+def process_files(directory, classifier):
     """
     This function processes all pcap files in the specified directory.
 
@@ -22,13 +22,13 @@ def process_files(directory, model, pipeline=False):
             for file_name in files:
                 if file_name.endswith(".pcap"):
                     file_path = os.path.join(root, file_name)
-                    analyse_packet(file_path, model, pipeline)
+                    analyse_packet(file_path, classifier)
                     print(f"Processed: {file_path}")
     except Exception as e:
         print(f"Error processing files: {e}")
 
 
-def analyse_packet(file_path, model, pipeline):
+def analyse_packet(file_path, classifier):
     """
     Analyzes a pcap file and extracts packet information for further processing.
 
@@ -39,8 +39,8 @@ def analyse_packet(file_path, model, pipeline):
     with open(result_file_path, 'w', encoding="utf-8") as output_file:
         try:
             packets = rdpcap(file_path)
-            # send initial prompt to model
-            process_string_input(generate_first_prompt(len(packets)), model, pipeline, output_file)
+            # send initial prompt to classifier
+            process_string_input(generate_first_prompt(len(packets)), classifier, output_file)
             for packet in packets:
                 if packet.haslayer('IP'):
                     if packet.haslayer('Raw'):
@@ -75,7 +75,7 @@ def analyse_packet(file_path, model, pipeline):
                     protocol = "unknown"
                     payload = "Unknown protocol or No Payload"
 
-                send_to_model(protocol, payload, model, pipeline, output_file)
+                send_to_model(protocol, payload, classifier, output_file)
         except AttributeError:
             pass
         except Exception as e:

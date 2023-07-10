@@ -1,5 +1,2 @@
-auto_gptq==0.2.2
-gpt4all==0.3.5
-pyshark==0.6
 scapy==2.5.0
 transformers==4.30.0
