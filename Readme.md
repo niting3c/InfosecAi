@@ -1,69 +1,84 @@
-# AI Packet Classifier
+# Training AI for Information Security: MSC Dissertation Project
 
-This project uses HuggingFace's Transformers library to classify packets in pcap files as potentially malicious or benign. This is accomplished using Zero-Shot Classification models.
+This repository contains the implementation of my MSC Dissertation project on "Training AI for Information Security". The project uses machine learning algorithms for detecting and classifying cyber threats in network traffic, specifically utilizing transformer-based models for zero-shot classification tasks.
 
 ## Table of Contents
 
-1. [Models Used](#models-used)
-2. [Python Scripts](#python-scripts)
-3. [Prerequisites](#prerequisites)
-4. [Usage](#usage)
-5. [Contributing](#contributing)
-6. [Credits](#credits)
-7. [Contact](#contact)
+- [Installation](#installation)
+- [Detailed File Descriptions](#detailed-file-descriptions)
+- [Usage](#usage)
+- [Models](#models)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Models Used
+## Installation
 
-The following models are utilized in the project for packet classification:
+To install the project, follow these steps:
 
-1. [deepnight-research/zsc-text](https://huggingface.co/deepnight-research/zsc-text)
-2. [facebook/bart-large-mnli](https://huggingface.co/facebook/bart-large-mnli)
-3. [MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli](https://huggingface.co/MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli)
-4. [sileod/deberta-v3-base-tasksource-nli](https://huggingface.co/sileod/deberta-v3-base-tasksource-nli)
+1. Clone the repository:
+    ```
+    git clone https://github.com/niting3c/AiPacketClassifier.git
+    ```
+2. Change directory to the cloned repository:
+    ```
+    cd AiPacketClassifier
+    ```
+3. Install the required Python packages:
+    ```
+    pip install -r requirements.txt
+    ```
+**Note**: This project has been tested on Python 3.11 and the required dependencies are listed in the `requirements.txt` file.
 
-These models are powerful tools for Zero-Shot Classification tasks.
+## Detailed File Descriptions
 
-## Python Scripts
+Here are brief descriptions of the main files in this repository:
 
-The project contains the following Python scripts:
+1. `run.py`: This is the main script that initializes multiple zero-shot classification models from the Transformers library, processes input files with each model, and writes the results.
 
-1. `run.py` : This is the entry point of the program. It initializes the models and sets the directory for processing the pcap files.
+2. `utils.py`: This script contains helper functions to handle file-related operations such as creating file paths.
+    - `create_result_file_path`: This function creates a result file path for the output files based on the original file path and the specified extension and directory.
+    - `get_file_path`: This function generates a file path by combining the provided root and file name.
 
-2. `pcap_operations.py` : It processes all the pcap files in the specified directory and extracts packet information for further processing.
+3. `promptmaker.py`: This script includes functions that generate prompts for the classification tasks. These prompts help guide the AI in its analysis of packets and instruct it on how to report its findings.
 
-3. `llm_model.py` : This script is used for creating a pipeline model and sending inputs to the model for classification. It includes handling and processing of inputs and creating prompts for the models.
+4. `pcap_operations.py`: This script contains functions that handle pcap file operations, including reading packets from pcap files, analyzing packets using the zero-shot classification models, and writing the results to an output file.
 
-4. `PromptMaker.py` : This file is responsible for generating specific prompts based on the protocol and payload of the packet which is then sent to the model for classification.
-
-5. `utils.py` : This contains utility functions used in the project such as creating the result file paths and getting the full file path.
-
-## Prerequisites
-
-The project is developed and tested with Python 3.11. Please make sure to install the necessary Python packages listed in `requirements.txt`.
+5. `llm_model.py`: This script includes functions that handle the interaction with the transformer models. It prepares the inputs for the classifier, generates the classifier's response, and processes the response.
 
 ## Usage
 
-1. Clone this repository and navigate to the repository's directory.
-2. Run `run.py` to start the processing of pcap files. This will generate output files with the analysis in the output directory.
+1. Make sure you have installed all necessary packages (see [Installation](#installation)).
 
-```bash
-python3 run.py
-```
+2. The `run.py` script expects input files to be located in the `./inputs` directory. Make sure you have populated this directory with your pcap files for processing.
+
+3. To start the program, simply run:
+    ```
+    python run.py
+    ```
+4. The results will be written to the `./output` directory.
+
+## Models
+
+The project uses the following transformer models for zero-shot classification tasks:
+
+1. [Deep Night Research's ZSC Text](https://huggingface.co/deepnight-research/zsc-text)
+2. [Facebook's BART Large MNLI](https://huggingface.co/facebook/bart-large-mnli)
+3. [Moritz Laurer's DeBERTa v3 base MNLI+FEVER+ANLI](https://huggingface.co/MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli)
+4. [Sileod's DeBERTa v3 base tasksource NLI](https://huggingface.co/sileod/deberta-v3-base-tasksource-nli)
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome. Feel free to check issues page if you want to contribute.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Credits
 
-This project utilizes the Transformers library by Hugging Face and the Scapy library for pcap file processing. 
+## License
 
-Documentation and code improvements were made with the help of OpenAI's ChatGPT.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-For any queries, you can reach out to me at nitin.gupta.22@ucl.ac.uk.
+Nitin Gupta - nitin.gupta.22@ucl.ac.uk
 
----
-
-Remember to change the necessary parts if you have made changes to the project that are not reflected here.
+Project Link: [https://github.com/niting3c/AiPacketClassifier](https://github.com/niting3c/AiPacketClassifier)
+  
+For specific requests or inquiries, feel free to contact me. Happy coding!
