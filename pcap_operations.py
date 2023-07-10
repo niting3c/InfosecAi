@@ -7,15 +7,17 @@ from PromptMaker import generate_first_prompt
 from llm_model import send_to_model, process_string_input
 from utils import create_result_file_path
 
+# Suppress unnecessary scapy warnings
 logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
 
 
 def process_files(directory, classifier):
     """
-    This function processes all pcap files in the specified directory.
+    Processes all pcap files in the specified directory.
 
     Args:
-        directory (str): The path to the directory containing pcap files.
+        directory (str): The directory containing pcap files.
+        classifier: The classifier model.
     """
     try:
         for root, dirs, files in os.walk(directory):
@@ -34,53 +36,68 @@ def analyse_packet(file_path, classifier):
 
     Args:
         file_path (str): The path to the pcap file.
+        classifier: The classifier model.
     """
-    result_file_path = create_result_file_path(file_path, '.txt', "./output/")
-    with open(result_file_path, 'w', encoding="utf-8") as output_file:
-        try:
+    try:
+        # Create a path for the result file
+        result_file_path = create_result_file_path(file_path, '.txt', "./output/")
+
+        with open(result_file_path, 'w', encoding="utf-8") as output_file:
             packets = rdpcap(file_path)
-            # send initial prompt to classifier
+
+            # Send initial prompt to classifier
             process_string_input(generate_first_prompt(len(packets)), classifier, output_file)
+
+            # Loop over each packet and extract necessary information
             for packet in packets:
-                if packet.haslayer('IP'):
-                    if packet.haslayer('Raw'):
-                        payload = packet['Raw'].load
-                    else:
-                        payload = packet['IP'].payload.load
-                    protocol = "IP"
-                elif packet.haslayer('TCP'):
-                    if packet.haslayer('Raw'):
-                        payload = packet['Raw'].load
-                    elif packet.haslayer('FTP'):
-                        if packet['TCP'].haslayer('Raw'):
-                            payload = packet['TCP']['Raw'].load
-                        else:
-                            payload = packet['TCP']['FTP'].payload.load
-                    else:
-                        payload = packet['TCP'].payload.load
-                    protocol = "TCP"
-                elif packet.haslayer('UDP'):
-                    if packet.haslayer('Raw'):
-                        payload = packet['Raw'].load
-                    else:
-                        payload = packet['UDP'].payload.load
-                    protocol = "UDP"
-                elif packet.haslayer('ICMP'):
-                    if packet.haslayer('Raw'):
-                        payload = packet['Raw'].load
-                    else:
-                        payload = packet['ICMP'].payload.load
-                    protocol = "ICMP"
-                else:
-                    protocol = "unknown"
-                    payload = "Unknown protocol or No Payload"
-
+                payload, protocol = extract_payload_protocol(packet)
                 send_to_model(protocol, payload, classifier, output_file)
-        except AttributeError:
-            pass
-        except Exception as e:
-            print(f"Error processing packet: {e}")
+        print(f"\nfile processed successfully: {file_path}\n")
+    except Exception as e:
+        print(f"Error analysing packet: {e}")
 
+
+def extract_payload_protocol(packet):
+    """
+    Extracts payload and protocol from the packet.
+
+    Args:
+        packet: The packet to process.
+
+    Returns:
+        tuple: The payload and protocol.
+    """
+    try:
+        if packet.haslayer('IP'):
+            payload = packet['Raw'].load if packet.haslayer('Raw') else packet['IP'].payload.load
+            protocol = "IP"
+        elif packet.haslayer('TCP'):
+            if packet.haslayer('Raw'):
+                payload = packet['Raw'].load
+            elif packet.haslayer('FTP'):
+                payload = packet['TCP']['Raw'].load if packet['TCP'].haslayer('Raw') else packet['TCP'][
+                    'FTP'].payload.load
+            else:
+                payload = packet['TCP'].payload.load
+            protocol = "TCP"
+        elif packet.haslayer('UDP'):
+            payload = packet['Raw'].load if packet.haslayer('Raw') else packet['UDP'].payload.load
+            protocol = "UDP"
+        elif packet.haslayer('ICMP'):
+            payload = packet['Raw'].load if packet.haslayer('Raw') else packet['ICMP'].payload.load
+            protocol = "ICMP"
+        else:
+            protocol = "unknown"
+            payload = "Unknown protocol or No Payload"
+
+        return payload, protocol
+    except AttributeError:
+        print("Error: Attribute not found in the packet.")
+    except Exception as e:
+        print(f"Error extracting payload and protocol: {e}")
+
+    return None, None
 
 # Example usage:
-process_files("./inputs/")
+# classifier = create_pipeline_model()
+# process_files("./inputs/", classifier)
