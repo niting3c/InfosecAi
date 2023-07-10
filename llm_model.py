@@ -71,7 +71,7 @@ def send_to_model(protocol, payload, classifier, outputfile):
     """
     try:
         # Calculate the number of batches
-        batch_size = 1600
+        batch_size = 800
         num_batches = len(payload) // batch_size
         if len(payload) % batch_size:
             num_batches += 1

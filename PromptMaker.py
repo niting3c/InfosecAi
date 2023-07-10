@@ -14,12 +14,9 @@ def generate_first_prompt(packet_count):
         and determine if each packet is malicious or not. 
         Packet Payload if bigger, will be split into chunks and sent for analysis.
         Consider examining the payload, headers, and protocols in a step-by-step analysis.
-        Your response should be a concise categorization of either "Malicious" or "Not Malicious". 
-        Do not provide any additional information or context beyond this categorization. 
         Note that an empty payload is not considered malicious.
         As an AI classifier specialized in detecting malicious activity or network attacks, 
         you should carefully examine the payload and follow a step-by-step analysis.
-        Avoid providing additional information or context beyond this categorization.
         If even One of the packet is malicious , mark the whole pcap file as malicious.
         The prompt for each packet will be provided after this instruction.
     """.format(packet_count)
@@ -37,9 +34,6 @@ def generate_prompt(protocol, payload):
         str: The generated prompt.
     """
     return """
-    Your task is to determine whether the protocol and payload are malicious requests or not. 
-    Follow the instructions provided in the beginning.
-    Your response should be a concise categorization either: `Malicious` or `Not Malicious`.
     Protocol: {0}
     Payload: {1}
     """.format(protocol, payload)
@@ -59,8 +53,6 @@ def generate_part_prompt(protocol, payload, count, total):
         str: The generated prompt.
     """
     return """
-    Your task is to determine whether the protocol and payload are malicious requests or not.
-    Follow the instructions provided in the beginning.
     As the payload is large, we will split the payload into {3} parts.
     Here is part {2} of the payload:
     Protocol: {0}
@@ -76,8 +68,6 @@ def generate_part_prompt_final():
         str: The generated prompt.
     """
     return """
-    Your task is to determine whether the protocol and payload are malicious requests or not.
-    Follow the instructions provided in the beginning.
     All the parts of the payload in the packet are provided, please analyze them as a whole
     and categorize whether they are malicious or not.
     """

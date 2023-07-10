@@ -1,7 +1,7 @@
 import os
 
 
-def create_result_file_path(file_path, extension, output_dir="./output/",suffix=""):
+def create_result_file_path(file_path, extension, output_dir="./output/", suffix=""):
     """
     Generates a new file path for a result file in the output directory.
 
@@ -14,8 +14,12 @@ def create_result_file_path(file_path, extension, output_dir="./output/",suffix=
         str: The path for the new file.
     """
     try:
+        # Create the output directory if it doesn't exist
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
         file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
-        new_file_path = os.path.join(output_dir, file_name_without_extension +"-"+suffix+ extension)
+        new_file_path = os.path.join(output_dir, file_name_without_extension + "-" + suffix + extension)
         print(f"Created new file path: {new_file_path}")
         return new_file_path
     except Exception as e:
@@ -35,6 +39,10 @@ def get_file_path(root, file_name):
         str: The full file path.
     """
     try:
+        # Create the root directory if it doesn't exist
+        if not os.path.exists(root):
+            os.makedirs(root)
+
         file_path = os.path.join(root, file_name)
         print(f"Generated file path: {file_path}")
         return file_path

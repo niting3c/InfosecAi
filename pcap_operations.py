@@ -1,7 +1,7 @@
 import logging
 import os
 
-from scapy.utils import rdpcap
+from scapy.all import rdpcap
 
 from PromptMaker import generate_first_prompt
 from llm_model import send_to_model, process_string_input
@@ -46,7 +46,8 @@ def analyse_packet(file_path, classifier,suffix):
             packets = rdpcap(file_path)
 
             # Send initial prompt to classifier
-            process_string_input(generate_first_prompt(len(packets)), classifier, output_file)
+            str= generate_first_prompt(len(packets))
+            process_string_input(str, classifier, output_file)
 
             # Loop over each packet and extract necessary information
             for packet in packets:
@@ -100,4 +101,4 @@ def extract_payload_protocol(packet):
 
 # Example usage:
 # classifier = create_pipeline_model()
-# process_files("./inputs/", classifier)
+#process_files("./inputs/", None,"hi")

@@ -22,7 +22,7 @@ def initialize_classifier(model_name):
 
 # Dictionary of transformer models to be used
 models = {
-    "deep": "deepnight-research/zsc-text",
+    "deepnight": "deepnight-research/zsc-text",
     "fb": "facebook/bart-large-mnli",
     "deberta-fever": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
     "sileod": "sileod/deberta-v3-base-tasksource-nli"
