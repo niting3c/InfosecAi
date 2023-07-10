@@ -23,11 +23,17 @@ To install the project, follow these steps:
     ```
     cd AiPacketClassifier
     ```
-3. Install the required Python packages:
+3. Install Conda if you haven't done so already. You can download it from [here](https://docs.conda.io/en/latest/miniconda.html).
+4. Create a Conda environment using the provided `environment.yml` file:
     ```
-    pip install -r requirements.txt
+    conda env create -f environment.yml
     ```
-**Note**: This project has been tested on Python 3.11 and the required dependencies are listed in the `requirements.txt` file.
+5. Activate the Conda environment:
+    ```
+    conda activate AiPacketClassifier
+    ```
+
+**Note**: This project has been tested on Python 3.9.5 and the required dependencies are listed in the `environment.yml` file.
 
 ## Detailed File Descriptions
 
@@ -47,7 +53,7 @@ Here are brief descriptions of the main files in this repository:
 
 ## Usage
 
-1. Make sure you have installed all necessary packages (see [Installation](#installation)).
+1. Make sure you have installed all necessary packages and activated the Conda environment (see [Installation](#installation)).
 
 2. The `run.py` script expects input files to be located in the `./inputs` directory. Make sure you have populated this directory with your pcap files for processing.
 
@@ -69,7 +75,6 @@ The project uses the following transformer models for zero-shot classification t
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
 
 ## License
 
