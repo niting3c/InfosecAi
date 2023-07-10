@@ -1,7 +1,6 @@
 from transformers import pipeline
 from pcap_operations import process_files
 
-
 def initialize_classifier(model_name):
     """
     Initializes a transformer classifier for the given model name.
@@ -21,21 +20,21 @@ def initialize_classifier(model_name):
         return None
 
 
-# List of transformer models to be used
-models = [
-    "deepnight-research/zsc-text",
-    "facebook/bart-large-mnli",
-    "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
-    "sileod/deberta-v3-base-tasksource-nli"
-]
+# Dictionary of transformer models to be used
+models = {
+    "deep": "deepnight-research/zsc-text",
+    "fb": "facebook/bart-large-mnli",
+    "deberta-fever": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    "sileod": "sileod/deberta-v3-base-tasksource-nli"
+}
 
 # Directory containing pcap files to be processed
 directory = './inputs'
 
-# Initialize each model and process the pcap files
-for model in models:
-    classifier = initialize_classifier(model)
+# Process the pcap files for each model
+for suffix, model_name in models.items():
+    classifier = initialize_classifier(model_name)
     if classifier:
-        process_files(directory, classifier)
+        process_files(directory, classifier, suffix)
     else:
-        print(f"Skipping {model} due to initialization error.")
+        print(f"Skipping {model_name} due to initialization error.")
