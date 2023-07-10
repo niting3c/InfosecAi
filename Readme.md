@@ -1,7 +1,3 @@
-Sure! I've updated the model names with clickable links redirecting to their respective HuggingFace model cards.
-
----
-
 # AI Packet Classifier
 
 This project uses HuggingFace's Transformers library to classify packets in pcap files as potentially malicious or benign. This is accomplished using Zero-Shot Classification models.
