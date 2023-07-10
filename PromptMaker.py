@@ -1,5 +1,6 @@
 def generate_first_prompt(packet_count):
     """
+    221 tokens
     Generates the initial prompt for analyzing packets.
 
     Args:
@@ -24,6 +25,7 @@ def generate_first_prompt(packet_count):
 
 def generate_prompt(protocol, payload):
     """
+    minimum 16 tokens
     Generates a prompt for analyzing a packet with the given protocol and payload.
 
     Args:
@@ -41,6 +43,7 @@ def generate_prompt(protocol, payload):
 
 def generate_part_prompt(protocol, payload, count, total):
     """
+    50 tokens minimum
     Generates a prompt for analyzing a part of a packet's payload.
 
     Args:

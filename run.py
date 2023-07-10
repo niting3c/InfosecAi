@@ -1,22 +1,24 @@
 from transformers import pipeline
+
 from pcap_operations import process_files
 
-def initialize_classifier(model_name):
+
+def initialize_classifier(hugging_face_model_name):
     """
-    Initializes a transformer classifier for the given model name.
+    Initializes a transformer initialised_model for the given model name.
 
     Args:
-        model_name (str): The name of the transformer model.
+        hugging_face_model_name (str): The name of the transformer model.
 
     Returns:
-        A transformer classifier for the given model name.
+        A transformer initialised_model for the given model name.
     """
     try:
-        classifier = pipeline("zero-shot-classification", model=model_name)
-        print(f"Successfully initialized {model_name}")
-        return classifier
+        initialised_model = pipeline("zero-shot-classification", model=hugging_face_model_name)
+        print(f"Successfully initialized {hugging_face_model_name}")
+        return initialised_model
     except Exception as e:
-        print(f"Error initializing {model_name}: {e}")
+        print(f"Error initializing {hugging_face_model_name}: {e}")
         return None
 
 
