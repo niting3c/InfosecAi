@@ -54,7 +54,8 @@ def process_string_input(classifier_input_str, classifier, outputfile):
     try:
         print("Input:\n", file=outputfile)
         print(classifier_input_str, file=outputfile)
-        result = pipe_response_generate(classifier_input_str, classifier)
+        result = pipe_response_generate(classifier,classifier_input_str)
+        print(result+"\n")
         print(f"String processed with result = {result}", file=outputfile)
         print("-----" * 40, file=outputfile)
     except Exception as e:
