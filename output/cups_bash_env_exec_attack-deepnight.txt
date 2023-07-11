@@ -1,0 +1,22 @@
+Input:
+
+
+        You are an advanced AI that detects malicious requests by parsing the various payloads of the protocols.
+        Please analyze the 48 packets provided in the follow-up prompts 
+        and determine if each packet is malicious or not. 
+        Packet Payload if bigger, will be split into chunks and sent for analysis.
+        Consider examining the payload, headers, and protocols in a step-by-step analysis.
+        Note that an empty payload is not considered malicious.
+        As an AI classifier specialized in detecting malicious activity or network attacks, 
+        you should carefully examine the payload and follow a step-by-step analysis.
+        If even One of the packet is malicious , mark the whole pcap file as malicious.
+        The prompt for each packet will be provided after this instruction.
+    
+String processed with result = {'sequence': '\n        You are an advanced AI that detects malicious requests by parsing the various payloads of the protocols.\n        Please analyze the 48 packets provided in the follow-up prompts \n        and determine if each packet is malicious or not. \n        Packet Payload if bigger, will be split into chunks and sent for analysis.\n        Consider examining the payload, headers, and protocols in a step-by-step analysis.\n        Note that an empty payload is not considered malicious.\n        As an AI classifier specialized in detecting malicious activity or network attacks, \n        you should carefully examine the payload and follow a step-by-step analysis.\n        If even One of the packet is malicious , mark the whole pcap file as malicious.\n        The prompt for each packet will be provided after this instruction.\n    ', 'labels': ['malicious', 'attack', 'normal', 'non-malicious'], 'scores': [0.5349340438842773, 0.2910204231739044, 0.10047300904989243, 0.0735725462436676]}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Input:
+
+
+    Protocol: IP
+    Payload: <IP  version=4 ihl=5 tos=0x0 len=60 id=36138 flags=DF frag=0 ttl=64 proto=tcp chksum=0x2b2e src=192.168.0.154 dst=192.168.0.121 |<TCP  sport=35613 dport=631 seq=1755658681 ack=0 dataofs=10 reserved=0 flags=S window=64240 chksum=0x8292 urgptr=0 options=[('MSS', 1460), ('SAckOK', b''), ('Timestamp', (976086603, 0)), ('NOP', None), ('WScale', 7)] |>>
+    

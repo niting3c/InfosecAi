@@ -45,8 +45,8 @@ def analyse_packet(file_path, classifier, suffix):
         with open(result_file_path, 'w', encoding="utf-8") as output_file:
             packets = rdpcap(file_path)
 
-            # Send initial prompt to classifier
-            process_string_input(generate_first_prompt(len(packets)), classifier, output_file)
+            # # Send initial prompt to classifier
+            # process_string_input(generate_first_prompt(len(packets)), classifier, output_file)
 
             # Loop over each packet and extract necessary information
             for packet in packets:

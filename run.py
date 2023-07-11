@@ -1,3 +1,4 @@
+import torch
 from transformers import pipeline
 
 from pcap_operations import process_files
@@ -14,7 +15,10 @@ def initialize_classifier(hugging_face_model_name):
         A transformer initialised_model for the given model name.
     """
     try:
-        initialised_model = pipeline("zero-shot-classification", model=hugging_face_model_name)
+        device = -1
+        if torch.cuda.is_available():
+            device = 0
+        initialised_model = pipeline("zero-shot-classification", model=hugging_face_model_name, device=device)
         print(f"Successfully initialized {hugging_face_model_name}")
         return initialised_model
     except Exception as e:
