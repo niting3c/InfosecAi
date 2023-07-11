@@ -1,0 +1,7 @@
+name: AiPacketClassifier
+channels:
+  - defaults
+dependencies:
+  - python=3.9.5
+  - scapy=2.4.3
+  - transformers
