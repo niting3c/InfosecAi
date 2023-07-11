@@ -2,7 +2,7 @@ name: AiPacketClassifier
 channels:
   - defaults
 dependencies:
-  - abseil-cpp=20211102.0=he9d5cce_0
+  - abseil-cpp=20211102.0
   - aiohttp=3.8.3=py39h6c40b1e_0
   - aiosignal=1.2.0=pyhd3eb1b0_0
   - appnope=0.1.2=py39hecd8cb5_1001
