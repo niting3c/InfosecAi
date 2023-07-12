@@ -2,7 +2,7 @@ from transformers import pipeline
 
 from PromptMaker import generate_prompt, generate_part_prompt, generate_part_prompt_final
 
-candidate_labels = ['malicious', 'non-malicious', 'attack', 'normal']
+candidate_labels = ['malicious', 'not malicious', 'attack']
 
 
 def create_pipeline_model(hugging_face_model_name):
@@ -54,8 +54,11 @@ def process_string_input(classifier_input_str, classifier, outputfile):
     try:
         print("Input:\n", file=outputfile)
         print(classifier_input_str, file=outputfile)
-        result = str(pipe_response_generate(classifier,classifier_input_str))
-        print(result+"\n")
+
+        result = pipe_response_generate(classifier, classifier_input_str)
+        result = str(result)
+        print(result + "\n")
+
         print(f"String processed with result = {result}", file=outputfile)
         print("-----" * 40, file=outputfile)
     except Exception as e:
@@ -89,7 +92,8 @@ def send_to_model(protocol, payload, classifier, outputfile):
 
                 print(f"Processing batch {i + 1} with protocol: {protocol}")
                 print(f"Batch content: {batch}")
-                process_string_input(generate_part_prompt(protocol, payload, i + 1, num_batches), classifier, outputfile)
+                process_string_input(generate_part_prompt(protocol, payload, i + 1, num_batches), classifier,
+                                     outputfile)
             process_string_input(generate_part_prompt_final(), classifier, outputfile)
         else:
             # Directly process the payload without creating batches

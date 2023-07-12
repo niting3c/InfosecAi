@@ -1,10 +1,15 @@
 Input:
-
-
     Protocol: IP
     Payload: <IP  version=4 ihl=5 tos=0x0 len=60 id=36138 flags=DF frag=0 ttl=64 proto=tcp chksum=0x2b2e src=192.168.0.154 dst=192.168.0.121 |<TCP  sport=35613 dport=631 seq=1755658681 ack=0 dataofs=10 reserved=0 flags=S window=64240 chksum=0x8292 urgptr=0 options=[('MSS', 1460), ('SAckOK', b''), ('Timestamp', (976086603, 0)), ('NOP', None), ('WScale', 7)] |>>
     
-String processed with result = {'sequence': "\n    Protocol: IP\n    Payload: <IP  version=4 ihl=5 tos=0x0 len=60 id=36138 flags=DF frag=0 ttl=64 proto=tcp chksum=0x2b2e src=192.168.0.154 dst=192.168.0.121 |<TCP  sport=35613 dport=631 seq=1755658681 ack=0 dataofs=10 reserved=0 flags=S window=64240 chksum=0x8292 urgptr=0 options=[('MSS', 1460), ('SAckOK', b''), ('Timestamp', (976086603, 0)), ('NOP', None), ('WScale', 7)] |>>\n    ", 'labels': ['attack', 'normal', 'non-malicious', 'malicious'], 'scores': [0.37262073159217834, 0.35418519377708435, 0.14714981615543365, 0.12604425847530365]}
+String processed with result = 
+{'sequence': "\n    Protocol: IP\n    Payload: <IP  version=4 ihl=5 tos=0x0 
+len=60 id=36138 flags=DF frag=0 ttl=64 proto=tcp chksum=0x2b2e src=192.168.0.154
+ dst=192.168.0.121 |<TCP  sport=35613 dport=631 seq=1755658681 ack=0 dataofs=10
+  reserved=0 flags=S window=64240 chksum=0x8292 urgptr=0 options=[('MSS', 1460), 
+  ('SAckOK', b''), ('Timestamp', (976086603, 0)), ('NOP', None), ('WScale', 7)] |>>\n 
+     ", 'labels': ['attack', 'normal', 'non-malicious', 'malicious'],
+      'scores': [0.37262073159217834, 0.35418519377708435, 0.14714981615543365, 0.12604425847530365]}
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Input:
 

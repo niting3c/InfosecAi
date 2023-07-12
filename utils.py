@@ -19,7 +19,7 @@ def create_result_file_path(file_path, extension, output_dir="./output/", suffix
             os.makedirs(output_dir)
 
         file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
-        new_file_path = os.path.join(output_dir, file_name_without_extension + "-" + suffix + extension)
+        new_file_path = os.path.join(output_dir + suffix + "/", file_name_without_extension + extension)
         print(f"Created new file path: {new_file_path}")
         return new_file_path
     except Exception as e:
