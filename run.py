@@ -28,26 +28,17 @@ def initialize_classifier(hugging_face_model_name, model_type):
 
 
 # Dictionary of transformer models to be used
-models = [{
-    "suffix": "deepnight",
-    "model_name": "deepnight-research/zsc-text",
-    "type": "zero-shot-classification"
-},
-    {
-        "suffix": "fb",
-        "model_name": "facebook/bart-large-mnli",
-        "type": "zero-shot-classification"
-    },
-    {
-        "suffix": "deberta-fever",
-        "model_name": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
-        "type": "zero-shot-classification"
-    },
-    {
-        "suffix": "sileod",
-        "model_name": "sileod/deberta-v3-base-tasksource-nli",
-        "type": "zero-shot-classification"
-    }]
+models = [
+    {"suffix": "vicuna", "model_name": "TheBloke/vicuna-13B-1.1-HF", "type": "text-generation"},
+    {"suffix": "deepnight", "model_name": "deepnight-research/zsc-text", "type": "zero-shot-classification"},
+    {"suffix": "llama", "type": "text-generation", "model_name": "openlm-research/open_llama_7b"},
+    {"suffix": "fb", "model_name": "facebook/bart-large-mnli", "type": "zero-shot-classification"},
+    {"suffix": "google", "type": "text2text-generation", "model_name": "google/flan-t5-xxl"},
+
+    # {"suffix": "deberta-fever", "model_name": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+    # "type": "zero-shot-classification"},
+    # {"suffix": "sileod", "model_name": "sileod/deberta-v3-base-tasksource-nli", "type": "zero-shot-classification"}
+]
 
 # Directory containing pcap files to be processed
 directory = './inputs'
