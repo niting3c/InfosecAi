@@ -79,7 +79,7 @@ def prepare_input_strings(protocol, payload, model_entry):
     """
     try:
         # Calculate the number of batches
-        batch_size = 900
+        batch_size = 800
         num_batches = len(payload) // batch_size
         if len(payload) % batch_size:
             num_batches += 1
