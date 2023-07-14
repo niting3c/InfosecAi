@@ -39,10 +39,10 @@ def initialize_classifier(hugging_face_model_name, model_type):
 # Dictionary of transformer models to be used
 models = [
 
-    {"model": None, "chat": None, "str": [], "suffix": "microsoft", "type": CONVERSATIONAL,
-     "model_name": "microsoft/DialoGPT-medium"},
     {"model": None, "chat": None, "str": [], "suffix": "llama", "type": TEXT_GENERATION,
      "model_name": "openlm-research/open_llama_7b"},
+    {"model": None, "chat": None, "str": [], "suffix": "microsoft", "type": CONVERSATIONAL,
+     "model_name": "microsoft/DialoGPT-medium"},
     {"model": None, "chat": None, "str": [], "suffix": "fb", "type": ZERO_SHOT,
      "model_name": "facebook/bart-large-mnli"},
     {"model": None, "chat": None, "str": [], "suffix": "google", "type": TEXT_TEXT,

@@ -21,6 +21,8 @@ def process_files(directory, model_entry):
             for file_name in files:
                 if file_name.endswith(".pcap"):
                     file_path = os.path.join(root, file_name)
+                    model_entry["str"] = []
+                    model_entry["chat"]= None
                     result_file_path = analyse_packet(file_path, model_entry)
                     send_to_llm_model(result_file_path, model_entry)
                     print(f"Processed: {file_path}")
@@ -91,21 +93,16 @@ def send_to_llm_model(filepath, model_entry):
     model_type = model_entry["type"]
     with open(filepath, "w") as output_file:
         if model_type == CONVERSATIONAL:
-            model_entry["chat"] = Conversation("Loading data")
-            # send conversations to model
-            result = model_entry["model"](model_entry["chat"])
-            print(f"Conversations processed:{str(result)}", file=output_file)
-            model_entry["chat"].add_user_input(
-                PromptMaker.generate_first_prompt(len(model_entry["str"])), overwrite=True)
+            model_entry["chat"] = Conversation(PromptMaker.generate_first_prompt(len(model_entry["str"])))
             # send conversations to model
             result = model_entry["model"](model_entry["chat"])
             print(f"Conversations processed:{str(result)}", file=output_file)
             for entry in model_entry["str"]:
-                model_entry["chat"].add_user_input(entry, overwrite=False)
+                model_entry["chat"].add_user_input(entry)
                 # send conversations to model
                 result = model_entry["model"](model_entry["chat"])
                 print(f"Conversations processed:{str(result)}", file=output_file)
-            model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt(), overwrite=False)
+            model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt())
 
             # send conversations to model
             result = model_entry["model"](model_entry["chat"])
