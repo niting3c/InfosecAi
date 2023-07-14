@@ -92,11 +92,20 @@ def send_to_llm_model(filepath, model_entry):
     with open(filepath, "w") as output_file:
         if model_type == CONVERSATIONAL:
             model_entry["chat"] = Conversation("Loading data")
+            # send conversations to model
+            result = model_entry["model"](model_entry["chat"])
+            print(f"Conversations processed:{str(result)}", file=output_file)
             model_entry["chat"].add_user_input(
                 PromptMaker.generate_first_prompt(len(model_entry["str"])), overwrite=True)
+            # send conversations to model
+            result = model_entry["model"](model_entry["chat"])
+            print(f"Conversations processed:{str(result)}", file=output_file)
             for entry in model_entry["str"]:
-                model_entry["chat"].add_user_input(entry)
-            model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt())
+                model_entry["chat"].add_user_input(entry, overwrite=False)
+                # send conversations to model
+                result = model_entry["model"](model_entry["chat"])
+                print(f"Conversations processed:{str(result)}", file=output_file)
+            model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt(), overwrite=False)
 
             # send conversations to model
             result = model_entry["model"](model_entry["chat"])
