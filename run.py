@@ -1,12 +1,13 @@
+import logging
+
 import torch
 from transformers import pipeline
 
 from pcap_operations import process_files
+from utils import CONVERSATIONAL, TEXT_GENERATION, ZERO_SHOT, TEXT_TEXT
 
-TEXT_GENERATION = "text-generation"
-ZERO_SHOT = "zero-shot-classification"
-TEXT_TEXT = "text2text-generation"
-CONVERSATIONAL = "conversational"
+# Suppress unnecessary scapy warnings
+logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
 
 
 def initialize_classifier(hugging_face_model_name, model_type):
@@ -37,12 +38,14 @@ def initialize_classifier(hugging_face_model_name, model_type):
 
 # Dictionary of transformer models to be used
 models = [
-    {"model": None, "suffix": "vicuna", "type": TEXT_GENERATION, "model_name": "TheBloke/vicuna-13B-1.1-HF"},
-    {"model": None, "chat": None, "suffix": "microsoft", "type": CONVERSATIONAL,
+    # {"model": None, "suffix": "vicuna", "type": TEXT_GENERATION, "model_name": "TheBloke/vicuna-13B-1.1-HF"},
+    {"model": None, "chat": None, "str": [], "suffix": "microsoft", "type": CONVERSATIONAL,
      "model_name": "microsoft/DialoGPT-medium"},
-    {"model": None, "suffix": "llama", "type": TEXT_GENERATION, "model_name": "openlm-research/open_llama_7b"},
-    {"model": None, "suffix": "fb", "type": ZERO_SHOT, "model_name": "facebook/bart-large-mnli"},
-    {"model": None, "suffix": "google", "type": TEXT_TEXT, "model_name": "google/flan-t5-xxl"},
+    {"model": None, "chat": None, "str": [], "suffix": "llama", "type": TEXT_GENERATION,
+     "model_name": "openlm-research/open_llama_7b"},
+    {"model": None, "chat": None, "str": [], "suffix": "fb", "type": ZERO_SHOT,
+     "model_name": "facebook/bart-large-mnli"},
+    {"model": None, "chat": None, "str": [], "suffix": "google", "type": TEXT_TEXT, "model_name": "google/flan-t5-xxl"},
     # {"suffix": "deberta-fever", "model_name": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
     # {"model": None, "suffix": "deepnight", "type": ZERO_SHOT, "model_name": "deepnight-research/zsc-text"},
     # "type": "zero-shot-classification"},

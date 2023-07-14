@@ -1,4 +1,3 @@
-import logging
 import os
 
 from scapy.all import rdpcap
@@ -6,17 +5,8 @@ from transformers import Conversation
 
 import PromptMaker
 from llm_model import prepare_input_strings
-
+from utils import CONVERSATIONAL, ZERO_SHOT
 from utils import create_result_file_path
-
-
-TEXT_GENERATION = "text-generation"
-ZERO_SHOT = "zero-shot-classification"
-TEXT_TEXT = "text2text-generation"
-CONVERSATIONAL = "conversational"
-
-# Suppress unnecessary scapy warnings
-logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
 
 
 def process_files(directory, model_entry):
@@ -32,7 +22,7 @@ def process_files(directory, model_entry):
                 if file_name.endswith(".pcap"):
                     file_path = os.path.join(root, file_name)
                     result_file_path = analyse_packet(file_path, model_entry)
-                    send_to_llm_model(model_entry, result_file_path)
+                    send_to_llm_model(result_file_path, model_entry)
                     print(f"Processed: {file_path}")
     except Exception as e:
         print(f"Error processing files: {e}")
@@ -100,18 +90,18 @@ def extract_payload_protocol(packet):
 def send_to_llm_model(filepath, model_entry):
     model_type = model_entry["type"]
     with open(filepath, "w") as output_file:
-        if model_type is CONVERSATIONAL:
+        if model_type == CONVERSATIONAL:
             model_entry["chat"] = Conversation("Loading data")
-            model_entry["chat"] = model_entry["chat"].add_user_input(
+            model_entry["chat"].add_user_input(
                 PromptMaker.generate_first_prompt(len(model_entry["str"])), overwrite=True)
             for entry in model_entry["str"]:
-                model_entry["chat"] = model_entry["chat"].add_user_input(entry)
-            model_entry["chat"] = model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt())
+                model_entry["chat"].add_user_input(entry)
+            model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt())
 
             # send conversations to model
             result = model_entry["model"](model_entry["chat"])
             print(f"Conversations processed:{str(result)}", file=output_file)
-        elif model_type is ZERO_SHOT:
+        elif model_type == ZERO_SHOT:
             for entry in model_entry["str"]:
                 print("----" * 40, file=output_file)
                 print(entry + "\n\n", file=output_file)
