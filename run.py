@@ -38,14 +38,17 @@ def initialize_classifier(hugging_face_model_name, model_type):
 
 # Dictionary of transformer models to be used
 models = [
-    # {"model": None, "suffix": "vicuna", "type": TEXT_GENERATION, "model_name": "TheBloke/vicuna-13B-1.1-HF"},
+
     {"model": None, "chat": None, "str": [], "suffix": "microsoft", "type": CONVERSATIONAL,
      "model_name": "microsoft/DialoGPT-medium"},
     {"model": None, "chat": None, "str": [], "suffix": "llama", "type": TEXT_GENERATION,
      "model_name": "openlm-research/open_llama_7b"},
     {"model": None, "chat": None, "str": [], "suffix": "fb", "type": ZERO_SHOT,
      "model_name": "facebook/bart-large-mnli"},
-    {"model": None, "chat": None, "str": [], "suffix": "google", "type": TEXT_TEXT, "model_name": "google/flan-t5-xxl"},
+    {"model": None, "chat": None, "str": [], "suffix": "google", "type": TEXT_TEXT,
+     "model_name": "google/flan-t5-xxl"},
+    {"model": None, "chat": None, "str": [], "suffix": "vicuna", "type": TEXT_GENERATION,
+     "model_name": "TheBloke/vicuna-13B-1.1-HF"},
     # {"suffix": "deberta-fever", "model_name": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
     # {"model": None, "suffix": "deepnight", "type": ZERO_SHOT, "model_name": "deepnight-research/zsc-text"},
     # "type": "zero-shot-classification"},
