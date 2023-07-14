@@ -1,6 +1,9 @@
 import os
 
-
+TEXT_GENERATION = "text-generation"
+ZERO_SHOT = "zero-shot-classification"
+TEXT_TEXT = "text2text-generation"
+CONVERSATIONAL = "conversational"
 def create_result_file_path(file_path, extension=".txt", output_dir="./output/", suffix="model"):
     """
     Generates a new file path for a result file in the output directory.
@@ -17,6 +20,8 @@ def create_result_file_path(file_path, extension=".txt", output_dir="./output/",
         # Create the output directory if it doesn't exist
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
+        if not os.path.exists(output_dir+suffix+"/"):
+            os.makedirs(output_dir+suffix+"/")
 
         file_name_without_extension = os.path.splitext(os.path.basename(file_path))[0]
         new_file_path = os.path.join(output_dir + suffix + "/", file_name_without_extension + extension)

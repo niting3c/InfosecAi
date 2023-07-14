@@ -1,11 +1,7 @@
 from transformers import pipeline
 
 from PromptMaker import generate_prompt, generate_part_prompt, generate_part_prompt_final
-
-TEXT_GENERATION = "text-generation"
-ZERO_SHOT = "zero-shot-classification"
-TEXT_TEXT = "text2text-generation"
-CONVERSATIONAL = "conversational"
+from utils import CONVERSATIONAL, TEXT_GENERATION, ZERO_SHOT, TEXT_TEXT
 candidate_labels = ['malicious', 'not malicious', 'attack']
 
 
