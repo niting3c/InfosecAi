@@ -1,6 +1,7 @@
 from transformers import pipeline
 
 from PromptMaker import generate_prompt, generate_part_prompt, generate_part_prompt_final
+from run import CONVERSATIONAL
 
 TEXT_GENERATION = "text-generation"
 ZERO_SHOT = "zero-shot-classification"
@@ -52,18 +53,25 @@ def process_string_input(input_string, model_entry, outputfile):
         model_entry: Model entry with all the references
         outputfile: The output file.
     """
+    print("-----" * 40, file=outputfile)
     try:
-        print("-----" * 40, file=outputfile)
-        if model_entry["type"] != ZERO_SHOT:
+        if model_entry["type"] == CONVERSATIONAL:
             print(f"\nInput:{input_string}\n", file=outputfile)
-        result = pipe_response_generate(model_entry["model"], input_string)
+            conversation_input = model_entry["chat"].add_user_input(input_string)
+            model_entry["chat"] = conversation_input
+            result = model_entry["model"](conversation_input)
+        elif model_entry["type"] == ZERO_SHOT:
+            result = pipe_response_generate(model_entry["model"], input_string)
+        else:
+            # update this as needed
+            result = pipe_response_generate(model_entry["model"], input_string)
         print(f"\nString processed with result = {str(result)}", file=outputfile)
         print("-----" * 40, file=outputfile)
     except Exception as e:
         print(f"Error processing string input: {e}")
 
 
-def send_to_model(protocol, payload, model_entry, outputfile):
+def prepare_input_strings(protocol, payload, model_entry):
     """
     Sends the protocol and payload to the model for classification.
 
@@ -86,17 +94,14 @@ def send_to_model(protocol, payload, model_entry, outputfile):
             for i in range(num_batches):
                 start_index = i * batch_size
                 end_index = start_index + batch_size
-                batch = payload[start_index:end_index]
-
-                print(f"Processing batch {i + 1} with protocol: {protocol}")
-                print(f"Batch content: {batch}")
-                process_string_input(generate_part_prompt(protocol, payload, i + 1, num_batches), model_entry,
-                                     outputfile)
-            process_string_input(generate_part_prompt_final(), model_entry, outputfile)
+                model_entry["str"].append(
+                    generate_part_prompt(protocol,
+                                         payload[start_index:end_index],
+                                         i + 1,
+                                         num_batches))
+            model_entry["str"].append(generate_part_prompt_final())
         else:
             # Directly process the payload without creating batches
-            print(f"Processing payload with protocol: {protocol}")
-            print(f"Payload content: {payload}")
-            process_string_input(generate_prompt(protocol, payload), model_entry, outputfile)
+            model_entry["str"].append(generate_prompt(protocol, payload))
     except Exception as e:
         print(f"Error sending to model: {e}")

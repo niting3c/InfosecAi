@@ -2,9 +2,11 @@ import logging
 import os
 
 from scapy.all import rdpcap
+from transformers import Conversation
 
-from PromptMaker import generate_first_prompt, generate_text_chat_last_prompt
-from llm_model import send_to_model, ZERO_SHOT, process_string_input
+import PromptMaker
+from llm_model import prepare_input_strings
+from run import CONVERSATIONAL, ZERO_SHOT
 from utils import create_result_file_path
 
 # Suppress unnecessary scapy warnings
@@ -23,7 +25,8 @@ def process_files(directory, model_entry):
             for file_name in files:
                 if file_name.endswith(".pcap"):
                     file_path = os.path.join(root, file_name)
-                    analyse_packet(file_path, model_entry)
+                    result_file_path = analyse_packet(file_path, model_entry)
+                    send_to_llm_model(model_entry, result_file_path)
                     print(f"Processed: {file_path}")
     except Exception as e:
         print(f"Error processing files: {e}")
@@ -39,20 +42,13 @@ def analyse_packet(file_path, model_entry):
     """
     try:
         # Create a path for the result file
-        result_file_path = create_result_file_path(file_path, '.txt', "./output/", model_entry["suffix"])
-
-        with open(result_file_path, 'w', encoding="utf-8") as output_file:
-            packets = rdpcap(file_path)
-            # # Send initial prompt to classifier
-            if model_entry[type] != ZERO_SHOT:
-                process_string_input(generate_first_prompt(len(packets)), model_entry, output_file)
-            # Loop over each packet and extract necessary information
-            for packet in packets:
-                protocol, payload = extract_payload_protocol(packet)
-                send_to_model(protocol, payload, model_entry, output_file)
-            if model_entry[type] != ZERO_SHOT:
-                process_string_input(generate_text_chat_last_prompt(), model_entry, output_file)
-        print(f"\nfile processed successfully: {file_path}\n")
+        model_entry["str"] = []
+        packets = rdpcap(file_path)
+        for packet in packets:
+            protocol, payload = extract_payload_protocol(packet)
+            prepare_input_strings(protocol, payload, model_entry)
+        print("inputs ready\n")
+        return create_result_file_path(file_path, '.txt', "./output/", model_entry["suffix"])
     except Exception as e:
         print(f"Error analysing packet: {e}")
 
@@ -94,6 +90,39 @@ def extract_payload_protocol(packet):
 
     return "", ""
 
+
+def send_to_llm_model(filepath, model_entry):
+    model_type = model_entry["type"]
+    with open(filepath, "w") as output_file:
+        if model_type is CONVERSATIONAL:
+            model_entry["chat"] = Conversation("Loading data")
+            model_entry["chat"] = model_entry["chat"].add_user_input(
+                PromptMaker.generate_first_prompt(len(model_entry["str"])), overwrite=True)
+            for entry in model_entry["str"]:
+                model_entry["chat"] = model_entry["chat"].add_user_input(entry)
+            model_entry["chat"] = model_entry["chat"].add_user_input(PromptMaker.generate_text_chat_last_prompt())
+
+            # send conversations to model
+            result = model_entry["model"](model_entry["chat"])
+            print(f"Conversations processed:{str(result)}", file=output_file)
+        elif model_type is ZERO_SHOT:
+            for entry in model_entry["str"]:
+                print("----" * 40, file=output_file)
+                print(entry + "\n\n", file=output_file)
+                print("----" * 40, file=output_file)
+            output_file.flush()
+            result = model_entry["model"](model_entry["str"])
+            print(f"Result from the packet file:{str(result)}\n", file=output_file)
+            output_file.flush()
+        else:
+            for entry in model_entry["str"]:
+                print("----" * 40, file=output_file)
+                print(entry + "\n\n", file=output_file)
+                print("----" * 40, file=output_file)
+            output_file.flush()
+            result = model_entry["model"](model_entry["str"])
+            print(f"Result from the packet file:{str(result)}", file=output_file)
+            output_file.flush()
 # Example usage:
 # classifier = create_pipeline_model()
 # process_files("./inputs/", None, "hi")
