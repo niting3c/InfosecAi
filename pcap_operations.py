@@ -6,8 +6,14 @@ from transformers import Conversation
 
 import PromptMaker
 from llm_model import prepare_input_strings
-from run import CONVERSATIONAL, ZERO_SHOT
+
 from utils import create_result_file_path
+
+
+TEXT_GENERATION = "text-generation"
+ZERO_SHOT = "zero-shot-classification"
+TEXT_TEXT = "text2text-generation"
+CONVERSATIONAL = "conversational"
 
 # Suppress unnecessary scapy warnings
 logging.getLogger('scapy.runtime').setLevel(logging.ERROR)
