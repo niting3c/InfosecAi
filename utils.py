@@ -1,7 +1,7 @@
 import os
 
 
-def create_result_file_path(file_path, extension, output_dir="./output/", suffix=""):
+def create_result_file_path(file_path, extension=".txt", output_dir="./output/", suffix="model"):
     """
     Generates a new file path for a result file in the output directory.
 
@@ -9,7 +9,7 @@ def create_result_file_path(file_path, extension, output_dir="./output/", suffix
         file_path (str): The original file path.
         extension (str): The desired file extension for the new file.
         output_dir (str, optional): The directory for the new file. Defaults to './output/'.
-
+        suffix (str) : The extra folder inside directory for easier seggregation
     Returns:
         str: The path for the new file.
     """

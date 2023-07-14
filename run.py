@@ -3,6 +3,10 @@ from transformers import pipeline
 
 from pcap_operations import process_files
 
+TEXT_GENERATION = "text-generation"
+ZERO_SHOT = "zero-shot-classification"
+TEXT_TEXT = "text2text-generation"
+
 
 def initialize_classifier(hugging_face_model_name, model_type):
     """
@@ -29,11 +33,11 @@ def initialize_classifier(hugging_face_model_name, model_type):
 
 # Dictionary of transformer models to be used
 models = [
-    {"suffix": "vicuna", "model_name": "TheBloke/vicuna-13B-1.1-HF", "type": "text-generation"},
-    {"suffix": "deepnight", "model_name": "deepnight-research/zsc-text", "type": "zero-shot-classification"},
-    {"suffix": "llama", "type": "text-generation", "model_name": "openlm-research/open_llama_7b"},
-    {"suffix": "fb", "model_name": "facebook/bart-large-mnli", "type": "zero-shot-classification"},
-    {"suffix": "google", "type": "text2text-generation", "model_name": "google/flan-t5-xxl"},
+    {"model": None, "suffix": "vicuna", "type": TEXT_GENERATION, "model_name": "TheBloke/vicuna-13B-1.1-HF"},
+    {"model": None, "suffix": "deepnight", "type": ZERO_SHOT, "model_name": "deepnight-research/zsc-text"},
+    {"model": None, "suffix": "llama", "type": TEXT_GENERATION, "model_name": "openlm-research/open_llama_7b"},
+    {"model": None, "suffix": "fb", "type": ZERO_SHOT, "model_name": "facebook/bart-large-mnli"},
+    {"model": None, "suffix": "google", "type": TEXT_TEXT, "model_name": "google/flan-t5-xxl"},
 
     # {"suffix": "deberta-fever", "model_name": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
     # "type": "zero-shot-classification"},
@@ -45,5 +49,6 @@ directory = './inputs'
 
 # Process the pcap files for each model
 for entry in models:
-    classifier = initialize_classifier(entry["model_name"], entry["type"])
-    process_files(directory, classifier, entry["suffix"])
+    entry["model"] = initialize_classifier(entry["model_name"], entry["type"])
+    process_files(directory, entry)
+    del entry #save some space

@@ -74,3 +74,10 @@ def generate_part_prompt_final():
     All the parts of the payload in the packet are provided, please analyze them as a whole
     and categorize whether they are malicious or not.
     """
+
+
+def generate_text_chat_last_prompt():
+    return """
+    Based on all the packets sent above , is the packet capture maliciour or an attack on the server/network ?
+    Provide response either `Malicious` or `Not-Malicious` 
+    """

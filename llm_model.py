@@ -2,6 +2,9 @@ from transformers import pipeline
 
 from PromptMaker import generate_prompt, generate_part_prompt, generate_part_prompt_final
 
+TEXT_GENERATION = "text-generation"
+ZERO_SHOT = "zero-shot-classification"
+TEXT_TEXT = "text2text-generation"
 candidate_labels = ['malicious', 'not malicious', 'attack']
 
 
@@ -40,39 +43,34 @@ def pipe_response_generate(initialised_model, classifier_input_str):
         return None
 
 
-def process_string_input(classifier_input_str, classifier, outputfile):
+def process_string_input(input_string, model_entry, outputfile):
     """
     Processes the input string with the classifier and write the result to output file.
 
     Args:
-        classifier_input_str (str): The input string for the classifier.
-        classifier: The classifier model.
+        input_string (str): The input string for the classifier.
+        model_entry: Model entry with all the references
         outputfile: The output file.
     """
-    if classifier is None:
-        return
     try:
-        print("Input:\n", file=outputfile)
-        print(classifier_input_str, file=outputfile)
-
-        result = pipe_response_generate(classifier, classifier_input_str)
-        result = str(result)
-        print(result + "\n")
-
-        print(f"String processed with result = {result}", file=outputfile)
+        print("-----" * 40, file=outputfile)
+        if model_entry["type"] != ZERO_SHOT:
+            print(f"\nInput:{input_string}\n", file=outputfile)
+        result = pipe_response_generate(model_entry["model"], input_string)
+        print(f"\nString processed with result = {str(result)}", file=outputfile)
         print("-----" * 40, file=outputfile)
     except Exception as e:
         print(f"Error processing string input: {e}")
 
 
-def send_to_model(protocol, payload, classifier, outputfile):
+def send_to_model(protocol, payload, model_entry, outputfile):
     """
     Sends the protocol and payload to the model for classification.
 
     Args:
         protocol (str): The protocol.
         payload: The payload.
-        classifier: The classifier model.
+        model_entry: The model_entry model.
         outputfile: The output file.
     """
     try:
@@ -92,13 +90,13 @@ def send_to_model(protocol, payload, classifier, outputfile):
 
                 print(f"Processing batch {i + 1} with protocol: {protocol}")
                 print(f"Batch content: {batch}")
-                process_string_input(generate_part_prompt(protocol, payload, i + 1, num_batches), classifier,
+                process_string_input(generate_part_prompt(protocol, payload, i + 1, num_batches), model_entry,
                                      outputfile)
-            process_string_input(generate_part_prompt_final(), classifier, outputfile)
+            process_string_input(generate_part_prompt_final(), model_entry, outputfile)
         else:
             # Directly process the payload without creating batches
             print(f"Processing payload with protocol: {protocol}")
             print(f"Payload content: {payload}")
-            process_string_input(generate_prompt(protocol, payload), classifier, outputfile)
+            process_string_input(generate_prompt(protocol, payload), model_entry, outputfile)
     except Exception as e:
         print(f"Error sending to model: {e}")
